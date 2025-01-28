@@ -1,0 +1,76 @@
+.team{
+    .team-img{
+        position: relative;
+            overflow: hidden;
+            border-radius: $br-16;
+            
+
+        img{
+            border-radius: $br-16;
+            transition: $transition;
+        }
+        .text-block{
+            position: absolute;
+            left: 0;
+            bottom: 24px;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: $transition;
+            .links-container{
+                background: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: clamp(4px, 0.417vw, 16px);
+                border-radius: 50%;
+                .links{
+                    border-radius: var(--Radius-Circular, 5000px);
+                    padding: 12px;
+                    background: $brown;
+                    transition: $transition;
+                   svg{
+                   display: grid;
+                   align-items: center;
+                   }
+                }
+            }
+        }
+        &:hover {
+            img {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+                -webkit-transition: all 0.6s linear 0s;
+            }
+            .text-block {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+    }
+    .team-links{
+        background: none;
+        display: flex;
+        align-items: center;
+        gap: clamp(4px, 0.417vw, 16px);
+        border-radius: 50%;
+        .team-block{
+            border-radius: var(--Radius-Circular, 5000px);
+            padding: 12px;
+            background: $brown;
+            transition: $transition;
+            &:hover{
+                background: $dark-black;
+                transition: $transition;
+            }
+          }
+    }
+
+    
+}
+.leaders{
+    .leader-text{
+        border-left: 2px solid $accent-2;
+        padding-left: 16px;
+    }
+}

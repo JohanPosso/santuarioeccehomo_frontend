@@ -1,0 +1,84 @@
+.areas {
+    .area-img {
+        img {
+            border-radius: $br-24;
+        }
+        .img-bibble {
+            background: $light-white;
+            display: flex;
+            justify-content: center;
+            margin-top: -43px;
+
+            position: relative;
+            z-index: 13;
+            width: fit-content;
+            padding: 22px;
+            border-radius: 100%;
+            margin: -82px auto 0;
+        }
+    }
+    .text-block {
+        border-radius: $br-12;
+        border-bottom: 2px solid $accent-2;
+    }
+    .img-user {
+        img {
+            background: $accent-2;
+            padding: clamp(12px, 0.833vw, 32px) clamp(18px, 1.25vw, 48px);
+            border-radius: $br-16;
+            margin-top: -24px;
+        }
+    }
+}
+.ministry-detail {
+    .minstry-image {
+        img {
+            border-radius: $br-24;
+        }
+    }
+    .services-block {
+        border-radius: $br-16;
+        border: 0.5px solid $light-gray;
+        padding: clamp(18px, 1.25vw, 48px);
+    }
+    .img-service{
+        background: url(../media/backgrounds/pic.png) no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: $br-16;
+        padding: clamp(24px, 1.667vw, 64px) 0;
+    }
+    .follow{
+        border-radius: $br-16;
+        border: 0.5px solid $light-gray;
+        padding: clamp(18px, 1.25vw, 48px);
+        .links-container{
+            background: none;
+            display: flex;
+            align-items: center;
+            gap: clamp(4px, 0.417vw, 16px);
+            border-radius: 50%;
+            .links{
+                border: 2px solid $accent-2;
+                border-radius: 50%;
+                padding: 12px;
+                transition: all 0.3s ease-in-out;
+               svg{
+                display: grid;
+                align-items: center;
+                path{
+                    fill:$accent-2;
+                }
+               }
+               &:hover{
+                   background: $accent-2;
+                   svg{
+                       path{
+                           fill:$white;
+                       }
+                   }
+               }
+            }
+        }
+    }
+}

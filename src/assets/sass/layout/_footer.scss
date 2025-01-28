@@ -1,0 +1,93 @@
+footer{
+    padding: clamp(25px, 2.5vw, 60px) 0 clamp(18px, 1.25vw, 48px) 0;
+    background-color: $medium-black;
+    overflow: hidden;
+    form{
+        .newsletter{
+            border-radius: var(--Radius-L, 16px);
+            border: 0.5px solid $lightest-gray;
+            padding:  clamp(12px, 0.833vw, 32px);
+            background:none;
+            input{
+            background:none;
+             border: none;
+             color: $lightest-gray;
+             &:focus{
+             border: none;
+             color: $lightest-gray;
+            outline: none;
+             }
+            }
+            button{
+                background-color: $accent-2;
+                flex-shrink: 0;
+                border: none;
+            }
+        }
+    }
+    .links-footer{
+        background: none;
+        display: flex;
+        align-items: center;
+        gap:  clamp(12px, 0.833vw, 32px);
+        border-radius: 50%;
+        .links{
+            background: none;
+            border-radius: 50%;
+            border: 1px solid $accent-2;
+            padding: clamp(12px,0.833vw,20px);
+            height: clamp(48px, 3.333vw, 128px);
+            width:  clamp(48px, 3.333vw, 128px);
+            transition: $transition;
+            svg{
+              width:clamp(24px, 1.667vw, 64px);
+              height: clamp(24px, 1.667vw, 64px);
+              path{
+                fill: $accent-2;
+              }
+            }
+            &:hover{
+                transition: $transition;
+                background: $accent-2;
+                path{
+                    fill:$white
+                   }
+            }
+    }
+    }
+    .footer-list{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 0px;
+       
+        li{
+            display: flex;
+            gap: 6px;
+            align-items: center;
+           a{
+            transition: $transition;
+            &:hover{
+            transition: $transition;
+              color: $accent-2;
+            }
+           }
+        }
+    }
+    .footer-lists{
+   
+       
+        li{
+            display: flex;
+            gap: 6px;
+            align-items: center;
+           a{
+            transition: $transition;
+            &:hover{
+            transition: $transition;
+              color: $accent-2;
+            }
+           }
+        }
+    }
+}

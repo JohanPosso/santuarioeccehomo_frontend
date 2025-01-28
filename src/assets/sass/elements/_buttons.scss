@@ -1,0 +1,364 @@
+/*----------------------------------------*/
+/*  Button CSS START
+/*---------------------------------------*/
+
+
+.cus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  padding: clamp(14px, 1.964vw, 32px) clamp(16px, 1.667vw, 64px);
+
+  background-color: $accent-2;
+  border-radius: $br-16;
+  position: relative;
+  overflow: hidden;
+  gap: $gap-12;
+  cursor: pointer;
+  transition: .5s;
+  font-size: clamp(14px, 0.938vw, 36px);
+  font-weight: 600;
+  font-family: $font-primary;
+  height: 50px;
+  line-height: 120%;
+  text-transform: capitalize;
+  z-index: 1;
+}
+
+.cus-btn::before,
+.cus-btn::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: $accent-1;
+  transition: 1s ease;
+}
+
+.cus-btn::before {
+  top: -1em;
+  left: -1em;
+}
+
+.cus-btn::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+}
+
+.cus-btn:hover::before,
+.cus-btn:hover::after {
+  height: 410px;
+  width: 410px;
+}
+
+.cus-btn:hover {
+  color: $white;
+  border: 1px solid $accent-1;
+}
+
+.cus-btn:active {
+  filter: brightness(.8);
+}
+
+.cus-btn {
+  svg {
+    path {
+      transition: $transition;
+    }
+  }
+}
+
+.cus-btn {
+  &:hover {
+    svg {
+      path {
+        transition: $transition;
+        fill: $dark-black;
+      }
+    }
+  }
+}
+
+
+
+.cus-btn-2{
+  border: 1px solid $white;
+  align-items: center;
+  gap: $gap-12;
+  display: inline-flex;
+  font-size: clamp(12px, 0.833vw, 32px);
+  text-transform: uppercase;
+  border-radius: $br-16;
+  font-family: $font-sec;
+  padding: clamp(14px, 0.964vw, 32px) clamp(16px, 1.667vw, 64px);
+  font-weight: 600;
+  color: $white;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cus-btn-2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $accent-1;
+  color: $white;
+  transform: translateX(-100%);
+  transition: all .3s;
+  z-index: -1;
+}
+
+.cus-btn-2:hover::before {
+  transform: translateX(0);
+  background-color: $accent-1;
+  color: $dark-black;
+}
+
+
+.cus-btn-3{
+  border: 1px solid $white;
+  align-items: center;
+  gap: $gap-12;
+  display: inline-flex;
+  font-size: clamp(12px, 0.833vw, 32px);
+  text-transform: uppercase;
+  border-radius: $br-16;
+  font-family: $font-sec;
+  padding: clamp(14px, 0.964vw, 32px) clamp(16px, 1.667vw, 64px);
+  font-weight: 600;
+  color: $white;
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+  text-decoration: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cus-btn-3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $accent-1;
+  color: $white;
+  transform: translateX(-100%);
+  transition: all .3s;
+  z-index: -1;
+}
+
+.cus-btn-3:hover::before {
+  transform: translateX(0);
+  background-color: $accent-1;
+  color: $dark-black;
+}
+
+
+/*----------------------------------------*/
+/* scroll to top
+/*----------------------------------------*/
+.scrollToTopBtn{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  background-color: $dark-black;
+  color: $white;
+  border: 1px solid $white;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 19px;
+  transition: $transition;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    color: $dark-black;
+    transition: $transition;
+    background-color: $accent-1;
+  }
+}
+
+
+
+// SLIDER ARROWS
+.slider-arrows {
+  display: flex;
+  align-items: center;
+  gap: $gap-16;
+
+  .arrow-btn {
+    width: clamp(32px, 2.5vw, 64px);
+    height: clamp(32px, 2.5vw, 64px);
+    border-radius: $br-4;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    border: 1px solid $lightest-gray;
+
+    svg {
+      width: clamp(24px, 1.667vw, 64px);
+      height: clamp(25px, 1.719vw, 64px);
+      transition: $transition;
+      path{
+        stroke: $dark-black;
+        transition: $transition;
+      }
+    }
+
+    &:hover {
+      transition: $transition;
+      background-color: $accent-1;
+      path{
+        stroke: $white;
+        transition: $transition;
+      }
+    }
+  }
+}
+
+// SOCIAL ICONS
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 0.625vw, 20px);
+  @include media-query(490px){
+    gap: 16px;
+  }
+
+  &.icon-v2{
+    gap: $gap-20;
+  }
+
+  li {
+    a {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: $transition;
+
+      svg {
+        width: clamp(20px, 1.25vw, 48px);
+        height: clamp(20px, 1.25vw, 48px);
+        path{
+          transition: $transition;
+        }
+      }
+
+      &:hover {
+        svg {
+          path{
+            transition: $transition;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ===================  PAGINATIONS =================== // 
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+
+  #border-pagination {
+    display: flex;
+    gap: 6px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+
+    li {
+      display: inline;
+
+      span {
+        color: $dark-gray;
+        transition: $transition;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: $white;
+        width: clamp(36px, 2.5vw, 64px);
+        height: clamp(36px, 2.5vw, 64px);
+        border-radius: $br-8;
+        background: $dark-gray;
+        float: left;
+        transition: $transition;
+        font-family: $font-primary;
+        font-size: clamp(20px, 1.198vw, 32px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; /* 21.6px */
+        @include media-query(399px){
+          font-size: 14px;
+        }
+
+        svg {
+          path {
+            stroke: $white;
+            transition: $transition;
+          }
+        }
+
+        &.active {
+          background-color: $brown;
+          color: $white;
+          border: 1px solid $accent-1;
+
+          svg {
+            path {
+              stroke: $white;
+              transition: $transition;
+            }
+          }
+        }
+
+        &:hover {
+          background-color: $brown;
+          color: $white;
+          border: 1px solid $accent-1;
+
+          svg {
+            path {
+              stroke: $white;
+              transition: $transition;
+            }
+          }
+        }
+      }
+
+      &:hover {
+        span {
+          color: $white;
+          transition: $transition;
+        }
+      }
+    }
+  }
+}

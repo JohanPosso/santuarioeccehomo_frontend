@@ -1,0 +1,13 @@
+.time{
+    .bg-time{
+        background: url('../media/backgrounds/banner.png') no-repeat;
+        padding: clamp(60px, 4.167vw, 128px) clamp(80px,5vw,120px);
+        background-size: cover;
+        background-position: center;
+        @include media-query(576px){
+            padding: clamp(59px, 4.167vw, 128px) clamp(28px, 5vw, 120px);
+            background-size: cover;
+            background-position: top;
+        }
+    }
+}

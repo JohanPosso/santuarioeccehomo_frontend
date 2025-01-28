@@ -1,0 +1,24 @@
+.pastor{
+    .pastor-image{
+        img{
+            border-radius: $br-24;
+        }
+    }
+    .links-container{
+        background: none;
+        display: flex;
+        align-items: center;
+        gap: clamp(4px, 0.417vw, 16px);
+        border-radius: 50%;
+        .links{
+            border-radius: var(--Radius-Circular, 5000px);
+            padding: 12px;
+            background: $accent-2;
+            transition: $transition;
+           svg{
+           display: grid;
+           align-items: center;
+           }
+        }
+    }
+}
