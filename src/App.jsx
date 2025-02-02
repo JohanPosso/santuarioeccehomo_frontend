@@ -17,6 +17,10 @@ import BlogGrid from "./components/Blogs/BlogGrid";
 import BlogDetalle from "./components/Blogs/BlogDetalle";
 import Contacto from "./components/Contacto";
 import ServiciosGrid from "./components/ServiciosGrid";
+import AdminEndpoints from "./components/AdminView";
+import InformacionView from "./view/informacionAdminView";
+import ServiciosView from "./view/serviciosAdminView";
+import BlogView from "./view/blogAdminView";
 import "./App.css";
 
 const App = () => {
@@ -48,6 +52,10 @@ const App = () => {
             <Route path="/blog-detalle/:id" element={<BlogDetalle />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/servicios" element={<ServiciosGrid />} />
+            <Route path="/administrador" element={<AdminEndpoints />} />
+            <Route path="/informacion-view" element={<InformacionView />} />
+            <Route path="/servicios-view" element={<ServiciosView />} />
+            <Route path="/blog-view" element={<BlogView />} />
           </Routes>
         </main>
         <Footer />

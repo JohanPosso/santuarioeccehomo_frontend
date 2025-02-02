@@ -5,7 +5,7 @@ const Contacto = () => {
     <div>
       <section class="title-banner">
         <div class="container-fluid">
-          <h1 class="white fw-700 text-center">Contact Us</h1>
+          <h1 class="white fw-700 text-center">Contactatenos</h1>
         </div>
       </section>
       <section class="contact py-80">
@@ -48,7 +48,7 @@ const Contacto = () => {
                   </svg>
                 </div>
                 <div>
-                  <h6 class="dark-gray fw-600 mb-6">Contact Us</h6>
+                  <h6 class="dark-gray fw-600 mb-6">Contactatenos</h6>
                   <p class="fw-400 mb-6 light-gray">
                     Escribenos a WhatsApp:{" "}
                     <span class="brown fw-700">
@@ -135,7 +135,7 @@ const Contacto = () => {
                 <div>
                   <h6 class="dark-gray fw-600 mb-6">Nuestra ubicacion</h6>
                   <p class="fw-400 mb-6 light-gray">
-                    Corregimiento Plan de Raspadura,Municipio Unión
+                    Corregimiento Plan de Raspadura, Municipio Unión
                     Panamericana, Chocó, Colombia
                   </p>
                 </div>

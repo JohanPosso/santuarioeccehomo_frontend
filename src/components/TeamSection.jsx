@@ -4,9 +4,7 @@ const TeamSection = () => {
   return (
     <section className="team py-80">
       <div className="container-fluid">
-        <h2 className="medium-black fw-700 heading mb-16">
-          Our Ministry Leaders
-        </h2>
+        <h2 className="medium-black fw-700 heading mb-16">Nuestros Lideres </h2>
         <p className="light-gray heading mb-48">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor
@@ -24,20 +22,20 @@ const TeamSection = () => {
             {
               id: 2,
               imgSrc: "/src/assets/media/team/team-2.png",
-              name: "Robert Fox",
-              role: "Sir Brandman",
+              name: "Lewis",
+              role: "Secretario parroquial",
             },
             {
               id: 3,
               imgSrc: "/src/assets/media/team/team-3.png",
-              name: "Emma Grace",
-              role: "Sir Brandman",
+              name: "Bernigson",
+              role: "Auxiliar de servicios del templo",
             },
             {
               id: 4,
               imgSrc: "/src/assets/media/team/team-4.png",
-              name: "Sophia Lane",
-              role: "Sir Brandman",
+              name: "Johan",
+              role: "Auxiliar de servicios casa rural",
             },
           ].map((leader) => (
             <div key={leader.id} className="col-xl-3 col-lg-6 col-md-6">

@@ -4,12 +4,12 @@ import React from "react";
 const Gallery = () => (
   <section className="gallery py-80">
     <div className="container-fluid">
-      <h2 className="medium-black fw-700 heading mb-16">Church Gallery</h2>
+      <h2 className="medium-black fw-700 heading mb-16">Galeria de fotos</h2>
       <div className="row row-gap-4">
         <div className="col-xl-3 col-md-6">
           <div className="img-gallery">
             <img
-              src="/src/assets/media/gallery/gallery-1.png"
+              src="/src/assets/media/gallery/gallery-1.jpg"
               alt="Gallery 1"
             />
           </div>
@@ -17,7 +17,7 @@ const Gallery = () => (
         <div className="col-xl-3 col-md-6">
           <div className="img-gallery">
             <img
-              src="/src/assets/media/gallery/gallery-2.png"
+              src="/src/assets/media/gallery/gallery-2.jpg"
               alt="Gallery 2"
             />
           </div>
@@ -25,7 +25,7 @@ const Gallery = () => (
         <div className="col-xl-3 col-md-6">
           <div className="img-gallery">
             <img
-              src="/src/assets/media/gallery/gallery-3.png"
+              src="/src/assets/media/gallery/gallery-3.jpg"
               alt="Gallery 3"
             />
           </div>
