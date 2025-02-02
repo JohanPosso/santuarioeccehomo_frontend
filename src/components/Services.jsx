@@ -1,4 +1,3 @@
-// Services.js
 import React from "react";
 
 const Services = () => {
@@ -11,14 +10,14 @@ const Services = () => {
             <div className="text-center">
               <img
                 src="/src/assets/media/services/service_2.png"
-                alt="service"
+                alt="Calendario de eventos"
                 className="mb-24"
               />
-              <h4 className="fw-700 white mb-12">Events Calendar</h4>
+              <h4 className="fw-700 white mb-12">Calendario de Actividades</h4>
               <p className="lightest-gray">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                <br /> sed do eiusmod tempor incididunt ut labore et dolore
-                <br /> magna. adipiscing enim ad minim veniam.
+                Mantente informado sobre nuestras misas, encuentros, retiros
+                espirituales y eventos comunitarios. Únete a nuestras
+                actividades y fortalece tu fe junto a la comunidad.
               </p>
             </div>
           </div>
@@ -28,14 +27,14 @@ const Services = () => {
             <div className="text-center">
               <img
                 src="/src/assets/media/services/service_3.png"
-                alt="service"
+                alt="Nuestros sacerdotes"
                 className="mb-24"
               />
-              <h4 className="fw-700 white mb-12">Our Preachers</h4>
+              <h4 className="fw-700 white mb-12">Guías Espirituales</h4>
               <p className="lightest-gray">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                <br /> sed do eiusmod tempor incididunt ut labore et dolore
-                <br /> magna. adipiscing enim ad minim veniam.
+                Nuestros sacerdotes y líderes religiosos están aquí para
+                acompañarte en tu camino de fe. Recibe orientación espiritual y
+                apoyo en momentos de necesidad.
               </p>
             </div>
           </div>
@@ -45,14 +44,14 @@ const Services = () => {
             <div className="text-center">
               <img
                 src="/src/assets/media/services/service_4.png"
-                alt="service"
+                alt="Reflexiones y sermones"
                 className="mb-24"
               />
-              <h4 className="fw-700 white mb-12">Latest Sermons</h4>
+              <h4 className="fw-700 white mb-12">Reflexiones y Sermones</h4>
               <p className="lightest-gray">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                <br /> sed do eiusmod tempor incididunt ut labore et dolore
-                <br /> magna. adipiscing enim ad minim veniam.
+                Accede a mensajes inspiradores y enseñanzas que nutren el alma.
+                Escucha sermones y reflexiones para fortalecer tu relación con
+                Dios y vivir la fe en el día a día.
               </p>
             </div>
           </div>

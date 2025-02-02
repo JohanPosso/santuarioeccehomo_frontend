@@ -21,6 +21,8 @@ import AdminEndpoints from "./components/AdminView";
 import InformacionView from "./view/informacionAdminView";
 import ServiciosView from "./view/serviciosAdminView";
 import BlogView from "./view/blogAdminView";
+import NotFoundPage from "./view/NotFoundPage";
+
 import "./App.css";
 
 const App = () => {
@@ -56,6 +58,8 @@ const App = () => {
             <Route path="/informacion-view" element={<InformacionView />} />
             <Route path="/servicios-view" element={<ServiciosView />} />
             <Route path="/blog-view" element={<BlogView />} />
+            {/* Página 404 para rutas no encontradas */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />

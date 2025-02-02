@@ -1,4 +1,3 @@
-// src/components/Events.js
 import React from "react";
 
 const Events = () => (
@@ -13,11 +12,11 @@ const Events = () => (
               alt="service"
               className="mb-24"
             />
-            <h4 className="fw-700 medium-black mb-12">Special Events</h4>
+            <h4 className="fw-700 medium-black mb-12">Retiro Espiritual</h4>
             <p className="light-gray">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              <br /> sed do eiusmod tempor incididunt ut labore et dolore
-              <br /> magna. adipiscing enim ad minim veniam.
+              Vive una experiencia de paz y reflexión en nuestros retiros
+              espirituales. Encuentra un espacio de oración y renovación para
+              fortalecer tu relación con Dios.
             </p>
           </div>
         </div>
@@ -30,11 +29,13 @@ const Events = () => (
               alt="service"
               className="mb-24"
             />
-            <h4 className="fw-700 medium-black mb-12">Special Events</h4>
+            <h4 className="fw-700 medium-black mb-12">
+              Confesiones y Dirección Espiritual
+            </h4>
             <p className="light-gray">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              <br /> sed do eiusmod tempor incididunt ut labore et dolore
-              <br /> magna. adipiscing enim ad minim veniam.
+              Acércate al sacramento de la reconciliación y recibe orientación
+              espiritual. Nuestros sacerdotes están disponibles para escucharte
+              y guiarte en tu camino de fe.
             </p>
           </div>
         </div>
@@ -47,11 +48,11 @@ const Events = () => (
               alt="service"
               className="mb-24"
             />
-            <h4 className="fw-700 medium-black mb-12">Special Events</h4>
+            <h4 className="fw-700 medium-black mb-12">Obras de Caridad</h4>
             <p className="light-gray">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              <br /> sed do eiusmod tempor incididunt ut labore et dolore
-              <br /> magna. adipiscing enim ad minim veniam.
+              Forma parte de nuestras iniciativas de ayuda a los más
+              necesitados. Contribuye con donaciones, voluntariado y acciones
+              solidarias para hacer la diferencia.
             </p>
           </div>
         </div>

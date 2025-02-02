@@ -37,11 +37,9 @@ const BlogGrid = () => {
             Historias y articulos
           </h2>
           <p className="light-gray heading mb-48">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor
-            <br />
-            incididunt ut labore et dolore magna. adipiscing enim ad minim
-            veniam.
+            Descubre relatos inspiradores y reflexiones sobre la fe, la
+            comunidad y la vida en nuestro santuario. Encuentra enseñanzas que
+            fortalecen el espíritu y testimonios que iluminan el camino.
           </p>
           <div className="row row-gap-4 justify-content-center">
             {blogs.length > 0 ? (
@@ -106,7 +104,7 @@ const BlogGrid = () => {
                 </div>
               ))
             ) : (
-              <p>No blogs available.</p> // Mensaje si no hay blogs
+              <p>No hay blogs disponibles.</p> // Mensaje si no hay blogs
             )}
           </div>
         </div>

@@ -1,20 +1,33 @@
-// About.js
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const About = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/find-data")
+      .then((response) => {
+        setData(response.data[0]);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data!", error);
+      });
+  }, []);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <section className="about-us py-80">
       <div className="container-fluid">
         <div className="row align-items-center row-gap-3">
           <div className="col-lg-6 col-md-6">
             <h2 className="medium-black fw-700 mb-16">
-              Nuestro viaje de fe y compañerismo{" "}
+              {data.seccion_2titulo}
             </h2>
-            <p className="light-gray mb-16">
-              Bienvenido a nuestro santuario, una comunidad amorosa y centrada
-              en la fe, dedicada a compartir el mensaje del amor y la gracia de
-              Dios...
-            </p>
+            <p className="light-gray mb-16">{data.seccion_2descripcion}</p>
             <a href="about.html" className="cus-btn">
               <span className="btn-text">More About Us</span>
             </a>

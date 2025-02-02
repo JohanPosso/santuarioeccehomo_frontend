@@ -4,12 +4,11 @@ const TeamSection = () => {
   return (
     <section className="team py-80">
       <div className="container-fluid">
-        <h2 className="medium-black fw-700 heading mb-16">Nuestros Lideres </h2>
+        <h2 className="medium-black fw-700 heading mb-16">Nuestros Líderes</h2>
         <p className="light-gray heading mb-48">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor
-          <br />
-          incididunt ut labore et dolore magna. adipiscing enim ad minim veniam.
+          Conoce a quienes guían nuestra comunidad con fe y compromiso. Nuestros
+          líderes están dedicados a servir, inspirar y acompañar a cada miembro
+          en su camino espiritual.
         </p>
         <div className="row row-gap-4">
           {[
