@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [data, setData] = useState(null);
@@ -93,7 +94,7 @@ const Footer = () => {
                     src="/src/assets/media/user/christan2.png"
                     alt="christan"
                   />
-                  <a href="">Colaboraciones</a>
+                  <Link to="/login">Iniciar sesion</Link>
                 </li>
               </ul>
             </div>

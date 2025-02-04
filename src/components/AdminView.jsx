@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 
 const AdminEndpoints = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Recuperar datos del usuario desde localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   const endpoints = [
     {
@@ -33,9 +42,12 @@ const AdminEndpoints = () => {
 
   return (
     <div>
-      <section class="title-banner">
-        <div class="container-fluid">
-          <h1 class="white fw-700 text-center">Contactatenos</h1>
+      <section className="title-banner">
+        <div className="container-fluid">
+          <h1 className="white fw-700 text-center">
+            Bienvenido,{" "}
+            {user ? `${user.name} ${user.lastname}` : "Administrador"}
+          </h1>
         </div>
       </section>
       <div

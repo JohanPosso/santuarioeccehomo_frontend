@@ -12,8 +12,13 @@ import "primeicons/primeicons.css";
 const ServiciosView = () => {
   const [servicios, setServicios] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [servicio, setServicio] = useState({ nombre: "", descripcion: "" });
+  const [servicio, setServicio] = useState({
+    id: null,
+    nombre: "",
+    descripcion: "",
+  });
   const toast = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:4000/find-servicio")
@@ -27,23 +32,41 @@ const ServiciosView = () => {
   };
 
   const handleSave = () => {
-    fetch("http://localhost:4000/crear-servicio", {
-      method: "POST",
+    const url = isEditing
+      ? `http://localhost:4000/update-servicio/${servicio.id}` // Para editar
+      : "http://localhost:4000/crear-servicio"; // Para crear
+    const method = isEditing ? "PUT" : "POST";
+
+    fetch(url, {
+      method: method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(servicio),
     })
       .then((res) => res.json())
-      .then(() => {
-        setServicios([...servicios, servicio]);
+      .then((savedServicio) => {
+        if (isEditing) {
+          // Actualiza el servicio en la lista sin necesidad de recargar
+          fetch("http://localhost:4000/find-servicio")
+            .then((res) => res.json())
+            .then((data) => {
+              setServicios(data); // Actualiza el estado con los nuevos servicios
+            });
+        } else {
+          setServicios((prevServicios) => [...prevServicios, savedServicio]); // Agrega el nuevo servicio
+        }
+
+        // Cierra el diálogo y limpia el formulario
         setVisible(false);
+        setServicio({ nombre: "", descripcion: "" });
+
         toast.current.show({
           severity: "success",
-          summary: "Guardado",
-          detail: "Servicio creado",
+          summary: isEditing ? "Actualizado" : "Guardado",
+          detail: isEditing ? "Servicio actualizado" : "Servicio creado",
           life: 3000,
         });
       })
-      .catch((err) => console.error("Error al guardar servicio:", err));
+      .catch((err) => console.error("Error guardando servicio:", err));
   };
 
   const handleDelete = (id) => {
@@ -63,16 +86,14 @@ const ServiciosView = () => {
   const handleEdit = (rowData) => {
     setServicio(rowData);
     setVisible(true);
+    setIsEditing(true); // Cambia el estado a edición
   };
 
   const items = [
     { label: "Servicios", icon: "pi pi-list" },
-    {
-      label: "Administracion",
-      icon: "pi pi-home",
-      url: "/administrador",
-    },
+    { label: "Administración", icon: "pi pi-home", url: "/administrador" },
   ];
+
   return (
     <div>
       <section className="title-banner">
@@ -88,7 +109,11 @@ const ServiciosView = () => {
           label="Nuevo Servicio"
           icon="pi pi-plus"
           className="p-button-success mb-3"
-          onClick={() => setVisible(true)}
+          onClick={() => {
+            setServicio({ id: null, nombre: "", descripcion: "" });
+            setIsEditing(false);
+            setVisible(true);
+          }}
         />
 
         <DataTable
@@ -104,17 +129,17 @@ const ServiciosView = () => {
             header="Acciones"
             body={(rowData) => (
               <div style={{ display: "flex", gap: "5px" }}>
-                <button className="btn btn-outline-warning">
-                  <span
-                    className="pi pi-pencil"
-                    onClick={() => handleEdit(rowData)}
-                  />
+                <button
+                  className="btn btn-outline-warning"
+                  onClick={() => handleEdit(rowData)}
+                >
+                  <span className="pi pi-pencil" />
                 </button>
-                <button className="btn btn-outline-danger">
-                  <span
-                    className="pi pi-trash"
-                    onClick={() => handleDelete(rowData.id)}
-                  />
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={() => handleDelete(rowData.id)}
+                >
+                  <span className="pi pi-trash" />
                 </button>
               </div>
             )}
@@ -122,7 +147,7 @@ const ServiciosView = () => {
         </DataTable>
 
         <Dialog
-          header="Nuevo Servicio"
+          header={isEditing ? "Editar Servicio" : "Nuevo Servicio"}
           visible={visible}
           style={{ width: "30vw" }}
           onHide={() => setVisible(false)}
@@ -143,7 +168,7 @@ const ServiciosView = () => {
           </div>
           <div className="text-right mt-3">
             <Button
-              label="Guardar"
+              label={isEditing ? "Actualizar" : "Guardar"}
               icon="pi pi-check"
               className="p-button-success"
               onClick={handleSave}

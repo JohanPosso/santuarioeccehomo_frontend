@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import ProtectedRoute from "./components/ProtectedRoute"; // Importa el componente
+import { UserProvider } from "./contexts/UserContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -22,49 +23,63 @@ import InformacionView from "./view/informacionAdminView";
 import ServiciosView from "./view/serviciosAdminView";
 import BlogView from "./view/blogAdminView";
 import NotFoundPage from "./view/NotFoundPage";
+import LoginView from "./view/loginView";
 
 import "./App.css";
+function AppContent() {
+  return (
+    <div className="tt-smooth-scroll">
+      <Header />
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <About />
+                <Services />
+                <Events />
+                <Team />
+                <MassTime />
+                <ChooseUs />
+                <TeamSection />
+                <Blog />
+                <Gallery />
+              </>
+            }
+          />
+          <Route path="/blogs" element={<BlogGrid />} />
+          <Route path="/blog-detalle" element={<BlogDetalle />} />
+          <Route path="/blog-detalle/:id" element={<BlogDetalle />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/servicios" element={<ServiciosGrid />} />
+
+          {/* RUTA PROTEGIDA */}
+          <Route
+            path="/administrador"
+            element={<ProtectedRoute element={<AdminEndpoints />} />}
+          />
+
+          <Route path="/informacion-view" element={<InformacionView />} />
+          <Route path="/servicios-view" element={<ServiciosView />} />
+          <Route path="/blog-view" element={<BlogView />} />
+          <Route path="/login" element={<LoginView />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+}
 
 const App = () => {
   return (
-    <Router>
-      <div className="tt-smooth-scroll">
-        <Header />
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <About />
-                  <Services />
-                  <Events />
-                  <Team />
-                  <MassTime />
-                  <ChooseUs />
-                  <TeamSection />
-                  <Blog />
-                  <Gallery />
-                </>
-              }
-            />
-            <Route path="/blogs" element={<BlogGrid />} />
-            <Route path="/blog-detalle" element={<BlogDetalle />} />
-            <Route path="/blog-detalle/:id" element={<BlogDetalle />} />
-            <Route path="/contacto" element={<Contacto />} />
-            <Route path="/servicios" element={<ServiciosGrid />} />
-            <Route path="/administrador" element={<AdminEndpoints />} />
-            <Route path="/informacion-view" element={<InformacionView />} />
-            <Route path="/servicios-view" element={<ServiciosView />} />
-            <Route path="/blog-view" element={<BlogView />} />
-            {/* Página 404 para rutas no encontradas */}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </UserProvider>
   );
 };
 
