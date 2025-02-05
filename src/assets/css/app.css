@@ -3054,7 +3054,7 @@ label.error {
       rgba(0, 0, 0, 0.55) 0%,
       rgba(0, 0, 0, 0.55) 100%
     ),
-    url("../media/backgrounds/iglesia.jpg") lightgray 50% / cover no-repeat;
+    url("/public/media/backgrounds/iglesia.jpg") lightgray 50% / cover no-repeat;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -3453,7 +3453,7 @@ label.error {
 }
 
 .time .bg-time {
-  background: url("../media/backgrounds/banner.png") no-repeat;
+  background: url("/public/misa.jpg") no-repeat;
   padding: clamp(60px, 4.167vw, 128px) clamp(80px, 5vw, 120px);
   background-size: cover;
   background-position: center;
@@ -3884,7 +3884,7 @@ label.error {
 }
 
 .title-banner {
-  background: url(../media/backgrounds/title-banner.png) no-repeat;
+  background: url(/public/media/backgrounds/title-banner.png) no-repeat;
   background-position: center;
   background-size: cover;
   height: clamp(320px, 20.833vw, 450px);

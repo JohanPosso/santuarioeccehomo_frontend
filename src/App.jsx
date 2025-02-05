@@ -24,6 +24,7 @@ import ServiciosView from "./view/serviciosAdminView";
 import BlogView from "./view/blogAdminView";
 import NotFoundPage from "./view/NotFoundPage";
 import LoginView from "./view/loginView";
+import SobreNosotros from "./components/SobreNosotros";
 
 import "./App.css";
 function AppContent() {
@@ -65,6 +66,7 @@ function AppContent() {
           <Route path="/servicios-view" element={<ServiciosView />} />
           <Route path="/blog-view" element={<BlogView />} />
           <Route path="/login" element={<LoginView />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

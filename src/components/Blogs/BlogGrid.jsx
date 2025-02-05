@@ -6,6 +6,7 @@ const BlogGrid = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate(); // Inicializar el hook useNavigate
   const API = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     // Hacer la solicitud a la API
     axios
@@ -25,16 +26,16 @@ const BlogGrid = () => {
 
   return (
     <div>
-      <section class="title-banner">
-        <div class="container-fluid">
-          <h1 class="white fw-700 text-center">Blog</h1>
+      <section className="title-banner">
+        <div className="container-fluid">
+          <h1 className="white fw-700 text-center">Blog</h1>
         </div>
       </section>
 
       <section className="blog py-80">
         <div className="container-fluid">
           <h2 className="medium-black fw-700 heading mb-16">
-            Historias y articulos
+            Historias y artículos
           </h2>
           <p className="light-gray heading mb-48">
             Descubre relatos inspiradores y reflexiones sobre la fe, la
@@ -44,23 +45,30 @@ const BlogGrid = () => {
           <div className="row row-gap-4 justify-content-center">
             {blogs.length > 0 ? (
               blogs.map((blog) => (
-                <div key={blog.id} className="col-xl-4 col-lg-6 col-md-6">
+                <div
+                  key={blog.id}
+                  style={{ overflow: "auto" }}
+                  className="col-xl-4 col-lg-6 col-md-6"
+                >
                   <div className="blog-image">
                     <img src={`${API}/image/${blog.image}`} alt={blog.name} />
                   </div>
                   <div className="text-block">
-                    <div className="d-flex gap-12 align-items-center mb-8">
-                      <p className="light-gray fw-400">Lana Steiner</p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="6"
-                        height="6"
-                        viewBox="0 0 6 6"
-                        fill="none"
-                      >
-                        <circle cx="3" cy="3" r="3" fill="#92949F" />
-                      </svg>
-                      <p className="light-gray fw-400">Lana Steiner</p>
+                    <div
+                      style={{ justifyContent: "space-between" }}
+                      className="d-flex gap-12 align-items-center mb-8"
+                    >
+                      <p className="light-gray fw-400">
+                        Creador por: {blog.link}
+                      </p>
+
+                      <p className="light-gray fw-400">
+                        {new Date(blog.createdAt).toLocaleDateString("es-ES", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })}
+                      </p>
                     </div>
                     <h6 className="medium-black fw-700 mb-16">{blog.name}</h6>
                     <p className="light-gray mb-24">{blog.description}</p>
@@ -69,7 +77,7 @@ const BlogGrid = () => {
                         className="btn btn-outline-info"
                         onClick={() => handleReadMore(blog.id)}
                       >
-                        read more
+                        Leer más
                       </button>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

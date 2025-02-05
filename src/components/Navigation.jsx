@@ -6,7 +6,7 @@ const Navigation = () => {
   return (
     <nav className="navigation d-flex align-items-center justify-content-between">
       <Link to="/">
-        <img src="/public/logo_santo.png" alt="logo" className="header-logo" />
+        <img src="/logo_santo.png" alt="logo" className="header-logo" />
       </Link>
       <div className="menu-button-right">
         <div className="main-menu__nav">
@@ -15,7 +15,7 @@ const Navigation = () => {
               <Link to="/">Inicio</Link>
             </li>
             <li>
-              <a href="about.html">Sobre nosotros</a>
+              <Link to="/sobre-nosotros">Sobre nosotros</Link>
             </li>
             <li className="dropdown">
               <Link to="/servicios">Servicios</Link>

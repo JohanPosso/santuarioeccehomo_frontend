@@ -31,11 +31,7 @@ const ChooseUs = () => {
           <div className="col-xl-4 col-md-6">
             <div className="choose-block">
               <div className="text-center">
-                <img
-                  src="/media/icons/icon2.png"
-                  alt="icon"
-                  className="mb-24"
-                />
+                <img src="/media/icons/icon.png" alt="icon" className="mb-24" />
                 <h5 className="medium-black fw-700 mb-12">
                   Horarios Flexibles
                 </h5>
@@ -49,11 +45,7 @@ const ChooseUs = () => {
           <div className="col-xl-4 col-md-6">
             <div className="choose-block">
               <div className="text-center">
-                <img
-                  src="/media/icons/icon3.png"
-                  alt="icon"
-                  className="mb-24"
-                />
+                <img src="/media/icons/icon.png" alt="icon" className="mb-24" />
                 <h5 className="medium-black fw-700 mb-12">
                   Comunidad y Acompañamiento
                 </h5>
