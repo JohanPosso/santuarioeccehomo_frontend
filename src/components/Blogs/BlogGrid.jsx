@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom"; // Importar useNavigate
 const BlogGrid = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate(); // Inicializar el hook useNavigate
-
+  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
     // Hacer la solicitud a la API
     axios
-      .get("http://localhost:4000/findblog")
+      .get(`${API}/findblog`)
       .then((response) => {
         setBlogs(response.data.reverse()); // Guardar los blogs en el estado
       })
@@ -46,10 +46,7 @@ const BlogGrid = () => {
               blogs.map((blog) => (
                 <div key={blog.id} className="col-xl-4 col-lg-6 col-md-6">
                   <div className="blog-image">
-                    <img
-                      src={`http://localhost:4000/image/${blog.image}`}
-                      alt={blog.name}
-                    />
+                    <img src={`${API}/image/${blog.image}`} alt={blog.name} />
                   </div>
                   <div className="text-block">
                     <div className="d-flex gap-12 align-items-center mb-8">

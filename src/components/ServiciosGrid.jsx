@@ -8,7 +8,8 @@ const ServiciosGrid = () => {
     // Función para obtener los datos de la API
     const fetchServicios = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/find-servicio");
+        const API = process.env.REACT_APP_API_URL;
+        const response = await axios.get(`${API}/find-servicio`);
         setServicios(response.data); // Guardamos los datos en el estado
       } catch (error) {
         console.error("Error al obtener los servicios:", error);

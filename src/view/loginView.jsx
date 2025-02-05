@@ -17,7 +17,7 @@ const LoginView = () => {
     setError(null); // Reiniciar errores al intentar nuevamente
 
     try {
-      const response = await axios.post("http://localhost:4000/token", {
+      const response = await axios.post(`${API}/token`, {
         email,
         password,
       });

@@ -15,9 +15,10 @@ const Blogview = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [editing, setEditing] = useState(false);
   const toast = React.useRef(null);
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch("http://localhost:4000/findblog")
+    fetch(`${API}/findblog`)
       .then((response) => response.json())
       .then((data) => setBlogs(data));
   }, []);
@@ -34,9 +35,7 @@ const Blogview = () => {
     formData.append("description", blog.description);
     formData.append("image", blog.image);
 
-    const url = editing
-      ? `http://localhost:4000/editblog/${blog.id}`
-      : "http://localhost:4000/createblog";
+    const url = editing ? `${API}/editblog/${blog.id}` : `${API}/createblog`;
     const method = editing ? "PUT" : "POST";
 
     await fetch(url, {
@@ -55,7 +54,7 @@ const Blogview = () => {
   };
 
   const deleteBlog = async (id) => {
-    await fetch(`http://localhost:4000/deleteblog/${id}`, {
+    await fetch(`${API}/deleteblog/${id}`, {
       method: "DELETE",
     });
 
@@ -77,7 +76,7 @@ const Blogview = () => {
   const imageBodyTemplate = (rowData) => {
     return (
       <img
-        src={`http://localhost:4000/image/${rowData.image}`}
+        src={`${API}/image/${rowData.image}`}
         alt={rowData.name}
         style={{ width: "100px" }}
       />

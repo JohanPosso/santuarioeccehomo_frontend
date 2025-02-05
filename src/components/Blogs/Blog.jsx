@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    fetch("http://localhost:4000/findblog")
+    fetch(`${API}/findblog`)
       .then((response) => response.json())
       .then((data) => setBlogs(data))
       .catch((error) => console.error("Error fetching blog data:", error));
@@ -26,10 +27,7 @@ const Blog = () => {
             <div key={blog.id} className="col-xl-4 col-lg-6 col-md-6">
               <a href={blog.link} target="_blank" rel="noopener noreferrer">
                 <div className="blog-image">
-                  <img
-                    src={`http://localhost:4000/image/${blog.image}`}
-                    alt={blog.name}
-                  />
+                  <img src={`${API}/image/${blog.image}`} alt={blog.name} />
                 </div>
               </a>
               <div className="text-block">

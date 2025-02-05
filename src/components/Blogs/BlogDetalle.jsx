@@ -6,11 +6,11 @@ const BlogDetalle = () => {
   const { id } = useParams(); // Obtener el id de la URL
   const [blog, setBlog] = useState(null);
   const [latestBlogs, setLatestBlogs] = useState([]); // Estado para los artículos recientes
-
+  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
     // Hacer la solicitud para obtener el blog por su id
     axios
-      .get(`http://localhost:4000/findblog/${id}`)
+      .get(`${API}/findblog/${id}`)
       .then((response) => {
         setBlog(response.data);
       })
@@ -20,7 +20,7 @@ const BlogDetalle = () => {
 
     // Solicitar los últimos blogs (esto puede ajustarse según tu API)
     axios
-      .get("http://localhost:4000/findblog")
+      .get(`${API}/findblog`)
       .then((response) => {
         setLatestBlogs(response.data.reverse()); // Guardar los blogs en el estado
       })
@@ -46,10 +46,7 @@ const BlogDetalle = () => {
             <div className="col-xl-9">
               <div className="detail-section">
                 <div className="detail-image mb-24">
-                  <img
-                    src={`http://localhost:4000/image/${blog.image}`}
-                    alt={blog.name}
-                  />
+                  <img src={`${API}/image/${blog.image}`} alt={blog.name} />
                 </div>
                 <h4 className="dark-gray fw-700 mb-24">{blog.name}</h4>
                 <p className="dark-gray mb-32">{blog.description}</p>
@@ -78,7 +75,7 @@ const BlogDetalle = () => {
                                   height: "100px", // Definimos una altura fija para las imágenes
                                   objectFit: "cover", // Mantiene la relación de aspecto pero corta las imágenes si es necesario
                                 }}
-                                src={`http://localhost:4000/image/${item.image}`}
+                                src={`${API}/image/${item.image}`}
                                 alt={item.name}
                                 className="recent-blog-img"
                               />

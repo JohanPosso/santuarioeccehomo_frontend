@@ -21,7 +21,7 @@ const ServiciosView = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:4000/find-servicio")
+    fetch(`${API}/find-servicio`)
       .then((res) => res.json())
       .then((data) => setServicios(data))
       .catch((err) => console.error("Error cargando servicios:", err));
@@ -33,8 +33,8 @@ const ServiciosView = () => {
 
   const handleSave = () => {
     const url = isEditing
-      ? `http://localhost:4000/update-servicio/${servicio.id}` // Para editar
-      : "http://localhost:4000/crear-servicio"; // Para crear
+      ? `${API}/update-servicio/${servicio.id}` // Para editar
+      : `${API}/crear-servicio`; // Para crear
     const method = isEditing ? "PUT" : "POST";
 
     fetch(url, {
@@ -46,7 +46,7 @@ const ServiciosView = () => {
       .then((savedServicio) => {
         if (isEditing) {
           // Actualiza el servicio en la lista sin necesidad de recargar
-          fetch("http://localhost:4000/find-servicio")
+          fetch(`${API}/find-servicio`)
             .then((res) => res.json())
             .then((data) => {
               setServicios(data); // Actualiza el estado con los nuevos servicios
@@ -70,7 +70,7 @@ const ServiciosView = () => {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:4000/delete-servicio/${id}`, { method: "DELETE" })
+    fetch(`${API}/delete-servicio/${id}`, { method: "DELETE" })
       .then(() => {
         setServicios(servicios.filter((s) => s.id !== id));
         toast.current.show({

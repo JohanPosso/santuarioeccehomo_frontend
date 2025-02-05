@@ -11,7 +11,7 @@ const InformacionView = () => {
   const toast = useRef(null);
 
   useEffect(() => {
-    fetch("http://localhost:4000/find-data")
+    fetch(`${API}/find-data`)
       .then((res) => res.json())
       .then((result) => {
         if (result.length > 0) setData(result[0]);
@@ -24,7 +24,7 @@ const InformacionView = () => {
   };
 
   const handleSubmit = () => {
-    fetch("http://localhost:4000/edit-data", {
+    fetch(`${API}/edit-data`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

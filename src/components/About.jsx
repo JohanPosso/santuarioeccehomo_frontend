@@ -3,10 +3,11 @@ import axios from "axios";
 
 const About = () => {
   const [data, setData] = useState(null);
+  const API = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/find-data")
+      .get(`${API}/find-data`)
       .then((response) => {
         setData(response.data[0]);
       })

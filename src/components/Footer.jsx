@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [data, setData] = useState(null);
-
+  const API = process.env.REACT_APP_API_URL;
   useEffect(() => {
-    fetch("http://localhost:4000/find-data")
+    fetch(`${API}/find-data`)
       .then((response) => response.json())
       .then((result) => {
         if (result.length > 0) {
