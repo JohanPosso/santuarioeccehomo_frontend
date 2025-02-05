@@ -8,7 +8,7 @@ const Events = () => (
         <div className="col-xl-4 col-md-6">
           <div className="text-center">
             <img
-              src="/src/assets/media/services/services-1.png"
+              src="/media/services/services-1.png"
               alt="service"
               className="mb-24"
             />
@@ -25,7 +25,7 @@ const Events = () => (
         <div className="col-xl-4 col-md-6">
           <div className="text-center">
             <img
-              src="/src/assets/media/services/iglesia_bg.png"
+              src="/media/services/iglesia_bg.png"
               alt="service"
               className="mb-24"
             />
@@ -44,7 +44,7 @@ const Events = () => (
         <div className="col-xl-4 col-md-6">
           <div className="text-center">
             <img
-              src="/src/assets/media/services/services-3.png"
+              src="/media/services/services-3.png"
               alt="service"
               className="mb-24"
             />

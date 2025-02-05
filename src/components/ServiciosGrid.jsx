@@ -44,10 +44,10 @@ const ServiciosGrid = () => {
               <div key={servicio.id} className="col-xl-3 col-md-6">
                 <div className="area-img mb-12">
                   <a href="ministry-detail.html">
-                    <img src="/src/assets/media/areas/area-1.png" alt="area" />
+                    <img src="/media/areas/area-1.png" alt="area" />
                   </a>
                   <div className="img-bibble mb-12">
-                    <img src="/src/assets/media/user/bible.png" alt="pic" />
+                    <img src="/media/user/bible.png" alt="pic" />
                   </div>
                 </div>
                 <div className="text-block">
@@ -59,7 +59,7 @@ const ServiciosGrid = () => {
                   </p>
                 </div>
                 <div className="img-user text-center mx-0">
-                  <img src="/src/assets/media/user/christan.png" alt="img" />
+                  <img src="/media/user/christan.png" alt="img" />
                 </div>
               </div>
             ))}

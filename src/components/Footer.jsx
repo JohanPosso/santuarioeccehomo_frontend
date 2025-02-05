@@ -36,31 +36,19 @@ const Footer = () => {
               <h5 className="white fw-700 mb-24">Explora</h5>
               <ul className="footer-list list-unstyled">
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="blog-grid.html">Artículos</a>
                 </li>
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="">Preguntas Frecuentes</a>
                 </li>
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="contact.html">Contactos</a>
                 </li>
                 <li className="white mb-8">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="">Colaboraciones</a>
                 </li>
               </ul>
@@ -69,31 +57,19 @@ const Footer = () => {
               <h5 className="white fw-700 mb-24">Enlaces Útiles</h5>
               <ul className="footer-lists list-unstyled">
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="blog-grid.html">Artículos</a>
                 </li>
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="">Preguntas Frecuentes</a>
                 </li>
                 <li className="mb-8 white">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <a href="contact.html">Contactos</a>
                 </li>
                 <li className="white mb-8">
-                  <img
-                    src="/src/assets/media/user/christan2.png"
-                    alt="christan"
-                  />
+                  <img src="/media/user/christan2.png" alt="christan" />
                   <Link to="/login">Iniciar sesion</Link>
                 </li>
               </ul>

@@ -49,7 +49,7 @@ const LoginView = () => {
         <div className="row">
           <div className="col-md-6">
             <img
-              src="/src/assets/media/backgrounds/iglesia_bg.png"
+              src="/media/backgrounds/iglesia_bg.png"
               alt="Image"
               className="img-fluid"
             />

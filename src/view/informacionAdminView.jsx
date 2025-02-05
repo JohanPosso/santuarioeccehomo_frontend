@@ -9,6 +9,7 @@ import { useRef } from "react";
 const InformacionView = () => {
   const [data, setData] = useState(null);
   const toast = useRef(null);
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/find-data`)

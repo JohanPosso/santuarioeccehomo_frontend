@@ -164,7 +164,7 @@ const Contacto = () => {
           <div class="row row-gap-4">
             <div class="col-xl-6">
               <div class="img-contact">
-                <img src="/src/assets/media/pages/contact.png" alt="contct" />
+                <img src="/media/pages/contact.png" alt="contct" />
               </div>
             </div>
             <div class="col-xl-6">

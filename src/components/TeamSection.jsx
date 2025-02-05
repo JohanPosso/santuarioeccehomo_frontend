@@ -14,25 +14,25 @@ const TeamSection = () => {
           {[
             {
               id: 1,
-              imgSrc: "/src/assets/media/team/team-1.png",
+              imgSrc: "/media/team/team-1.png",
               name: "Jorge Ernesto Zapata",
               role: "Parroco",
             },
             {
               id: 2,
-              imgSrc: "/src/assets/media/team/team-2.png",
+              imgSrc: "/media/team/team-2.png",
               name: "Lewis",
               role: "Secretario parroquial",
             },
             {
               id: 3,
-              imgSrc: "/src/assets/media/team/team-3.png",
+              imgSrc: "/media/team/team-3.png",
               name: "Bernigson",
               role: "Auxiliar de servicios del templo",
             },
             {
               id: 4,
-              imgSrc: "/src/assets/media/team/team-4.png",
+              imgSrc: "/media/team/team-4.png",
               name: "Johan",
               role: "Auxiliar de servicios casa rural",
             },
@@ -45,7 +45,7 @@ const TeamSection = () => {
                 <div className="team-links">
                   <img
                     style={{ width: 50 }}
-                    src="/src/assets/media/icons/icon2.png"
+                    src="/media/icons/icon2.png"
                     alt=""
                   />
                 </div>

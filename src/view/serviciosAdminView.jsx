@@ -19,6 +19,7 @@ const ServiciosView = () => {
   });
   const toast = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/find-servicio`)

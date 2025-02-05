@@ -9,7 +9,7 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/src/assets/media/services/service_2.png"
+                src="/media/services/service_2.png"
                 alt="Calendario de eventos"
                 className="mb-24"
               />
@@ -26,7 +26,7 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/src/assets/media/services/service_3.png"
+                src="/media/services/service_3.png"
                 alt="Nuestros sacerdotes"
                 className="mb-24"
               />
@@ -43,7 +43,7 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/src/assets/media/services/service_4.png"
+                src="/media/services/service_4.png"
                 alt="Reflexiones y sermones"
                 className="mb-24"
               />
