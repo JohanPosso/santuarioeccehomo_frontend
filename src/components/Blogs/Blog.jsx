@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/findblog`)

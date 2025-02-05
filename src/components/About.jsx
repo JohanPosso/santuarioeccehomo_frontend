@@ -3,7 +3,7 @@ import axios from "axios";
 
 const About = () => {
   const [data, setData] = useState(null);
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     axios

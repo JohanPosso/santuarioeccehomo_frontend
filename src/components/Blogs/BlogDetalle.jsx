@@ -6,7 +6,7 @@ const BlogDetalle = () => {
   const { id } = useParams(); // Obtener el id de la URL
   const [blog, setBlog] = useState(null);
   const [latestBlogs, setLatestBlogs] = useState([]); // Estado para los artículos recientes
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
     // Hacer la solicitud para obtener el blog por su id
     axios

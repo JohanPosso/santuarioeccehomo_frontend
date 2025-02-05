@@ -7,7 +7,7 @@ const Team = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const API = process.env.REACT_APP_API_URL;
+        const API = import.meta.env.VITE_API_URL;
         const response = await axios.get(`${API}/find-servicio`);
         // Obtener solo los últimos 4 servicios
         setServices(response.data.slice(0, 4));

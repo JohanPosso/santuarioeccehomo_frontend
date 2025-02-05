@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"; // Importar useNavigate
 const BlogGrid = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate(); // Inicializar el hook useNavigate
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
   useEffect(() => {
     // Hacer la solicitud a la API
     axios

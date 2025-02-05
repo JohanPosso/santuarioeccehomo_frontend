@@ -17,6 +17,7 @@ const LoginView = () => {
     setError(null); // Reiniciar errores al intentar nuevamente
 
     try {
+      const API = import.meta.env.VITE_API_URL;
       const response = await axios.post(`${API}/token`, {
         email,
         password,

@@ -15,7 +15,7 @@ const Blogview = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [editing, setEditing] = useState(false);
   const toast = React.useRef(null);
-  const API = process.env.REACT_APP_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${API}/findblog`)
