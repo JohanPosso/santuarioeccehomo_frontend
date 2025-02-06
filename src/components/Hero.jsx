@@ -1,5 +1,3 @@
-// Hero.js
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -45,8 +43,14 @@ const Hero = () => {
           </div>
           <div className="col-xl-5 col-lg-12 col-md-9 col-sm-10">
             <div className="right-block">
-              {/* Form for Donations */}
-              <img style={{ width: 400 }} src="/image.jpeg" alt="" />
+              {/* Mostrar la imagen de la sección 1 desde el backend */}
+              {data.imagen_sec1 && (
+                <img
+                  style={{ width: 400 }}
+                  src={`${API}/image/${data.imagen_sec1}`} // Asegúrate de que la ruta sea correcta
+                  alt="Imagen Sección 1"
+                />
+              )}
             </div>
           </div>
         </div>

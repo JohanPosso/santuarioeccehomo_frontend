@@ -21,12 +21,17 @@ var MyScroll = "";
       Init.countdownInit(".countdown", "2024/12/01");
       Init.formValidation();
       Init.contactForm();
-
     },
     //backtotop
     backToTop: function () {
       var scrollToTopBtn = document.querySelector(".scrollToTopBtn");
       var rootElement = document.documentElement;
+
+      if (!scrollToTopBtn) {
+        console.warn("Elemento .scrollToTopBtn no encontrado.");
+        return; // Salir de la función si el botón no está presente
+      }
+
       function handleScroll() {
         var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
         if (rootElement.scrollTop / scrollTotal > 0.05) {
@@ -35,9 +40,11 @@ var MyScroll = "";
           scrollToTopBtn.classList.remove("showBtn");
         }
       }
+
       function scrollToTop() {
         rootElement.scrollTo({ top: 0, behavior: "smooth" });
       }
+
       scrollToTopBtn.addEventListener("click", scrollToTop);
       document.addEventListener("scroll", handleScroll);
     },
@@ -47,7 +54,6 @@ var MyScroll = "";
       }, 3000);
     },
 
-    
     header: function () {
       function dynamicCurrentMenuClass(selector) {
         let FileName = window.location.href.split("/").reverse()[0];
@@ -125,22 +131,22 @@ var MyScroll = "";
       });
     },
 
-      // Countdown Timer
-      countdownInit: function (countdownSelector, countdownTime, countdown) {
-        var eventCounter = $(countdownSelector);
-        if (eventCounter.length) {
-          eventCounter.countdown(countdownTime, function (e) {
-            $(this).html(
-              e.strftime(
-                "<li><h4>%D</h4><p>Days</p></li>\
+    // Countdown Timer
+    countdownInit: function (countdownSelector, countdownTime, countdown) {
+      var eventCounter = $(countdownSelector);
+      if (eventCounter.length) {
+        eventCounter.countdown(countdownTime, function (e) {
+          $(this).html(
+            e.strftime(
+              "<li><h4>%D</h4><p>Days</p></li>\
                 <li><h4>%H</h4><p>Hrs</p></li>\
                 <li><h4>%M</h4><p>Mins</p></li>\
                 <li><h4>%S</h4><p>Secs</p></li>"
-              )
-            );
-          });
-        }
-      },
+            )
+          );
+        });
+      }
+    },
     slick: function () {
       if ($(".testimonials-slider").length) {
         $(".testimonials-slider").slick({
@@ -196,19 +202,18 @@ var MyScroll = "";
         });
       }
     },
-  // Form Validation
-  formValidation: function () {
-    if ($(".contact-form").length) {
-      $(".contact-form").validate();
-    }
-    if ($(".login-form").length) {
-      $(".login-form").validate();
-    }
-  },
+    // Form Validation
+    formValidation: function () {
+      if ($(".contact-form").length) {
+        $(".contact-form").validate();
+      }
+      if ($(".login-form").length) {
+        $(".login-form").validate();
+      }
+    },
 
-  
-     // Contact Form
-     contactForm: function () {
+    // Contact Form
+    contactForm: function () {
       $(".contact-form").on("submit", function (e) {
         e.preventDefault();
         if ($(".contact-form").valid()) {

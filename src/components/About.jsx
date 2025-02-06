@@ -30,11 +30,11 @@ const About = () => {
             </h2>
             <p className="light-gray mb-16">{data.seccion_2descripcion}</p>
             <a href="about.html" className="cus-btn">
-              <span className="btn-text">More About Us</span>
+              <span className="btn-text">Sobre nosotros</span>
             </a>
           </div>
           <div className="col-lg-6 col-md-6">
-            <img src="/media/services/service_1.png" alt="services" />
+            <img src={`${API}/image/${data.imagen_sec2}`} alt="services" />
           </div>
         </div>
       </div>

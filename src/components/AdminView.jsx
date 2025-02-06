@@ -8,29 +8,42 @@ const AdminEndpoints = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Recuperar datos del usuario desde localStorage
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Elimina la sesión
+    setUser(null); // Actualiza el estado
+    setTimeout(() => {
+      window.location.reload(); // Recarga la página para reflejar el cambio
+    }, 300);
+  };
+
   const endpoints = [
     {
-      title: "Información General",
-      description: "Sube y administra las fotos del sistema.",
-      route: "/informacion-view",
-      icon: "pi pi-images",
-    },
-    {
-      title: "Gestionar Servicios",
-      description: "Listado de todos los usuarios almacenados en el sistema.",
-      route: "/servicios-view",
+      title: "Gestionar Usuarios",
+      description: "Administra usuarios.",
+      route: "/usuarios-view",
       icon: "pi pi-users",
     },
     {
+      title: "Información General",
+      description: "Administra información.",
+      route: "/informacion-view",
+      icon: "pi pi-info-circle",
+    },
+    {
+      title: "Gestionar Servicios",
+      description: "Administra servicios.",
+      route: "/servicios-view",
+      icon: "pi pi-cog",
+    },
+    {
       title: "Gestionar Blog",
-      description: "Visualiza los reportes generados por el sistema.",
+      description: "Administra blog.",
       route: "/blog-view",
       icon: "pi pi-book",
     },
@@ -50,6 +63,22 @@ const AdminEndpoints = () => {
           </h1>
         </div>
       </section>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "20px",
+        }}
+      >
+        <Button
+          label="Cerrar Sesión"
+          icon="pi pi-sign-out"
+          className="p-button-danger"
+          onClick={handleLogout}
+        />
+      </div>
+
       <div
         className="admin-container"
         style={{

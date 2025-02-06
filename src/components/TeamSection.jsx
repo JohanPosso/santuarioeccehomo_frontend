@@ -14,32 +14,29 @@ const TeamSection = () => {
           {[
             {
               id: 1,
-              imgSrc: "/media/team/team-1.png",
+              imgSrc: "/parroco.jpg",
               name: "Jorge Ernesto Zapata",
-              role: "Parroco",
+              role: "Párroco",
             },
             {
               id: 2,
-              imgSrc: "/media/team/team-2.png",
-              name: "Lewis",
-              role: "Secretario parroquial",
-            },
-            {
-              id: 3,
-              imgSrc: "/media/team/team-3.png",
-              name: "Bernigson",
-              role: "Auxiliar de servicios del templo",
-            },
-            {
-              id: 4,
-              imgSrc: "/media/team/team-4.png",
-              name: "Johan",
-              role: "Auxiliar de servicios casa rural",
+              imgSrc: "/secretaria-santuario.jpg",
+              name: "Surley Mosquera",
+              role: "Secretaria parroquial",
             },
           ].map((leader) => (
             <div key={leader.id} className="col-xl-3 col-lg-6 col-md-6">
-              <div className="team-img mb-24">
-                <img src={leader.imgSrc} alt="team" />
+              <div className="team-img mb-24" style={{ textAlign: "center" }}>
+                <img
+                  src={leader.imgSrc}
+                  alt="team"
+                  style={{
+                    width: "200px", // Tamaño fijo
+                    height: "200px", // Tamaño fijo
+                    objectFit: "cover", // Asegura que la imagen se ajuste bien sin distorsión
+                    borderRadius: "50%", // Hace que las imágenes sean circulares
+                  }}
+                />
               </div>
               <div className="d-flex gap-24 align-items-center">
                 <div className="team-links">

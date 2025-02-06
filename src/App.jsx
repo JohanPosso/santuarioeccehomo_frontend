@@ -25,6 +25,7 @@ import BlogView from "./view/blogAdminView";
 import NotFoundPage from "./view/NotFoundPage";
 import LoginView from "./view/loginView";
 import SobreNosotros from "./components/SobreNosotros";
+import UsuariosView from "./view/UsuariosView";
 
 import "./App.css";
 function AppContent() {
@@ -56,15 +57,28 @@ function AppContent() {
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/servicios" element={<ServiciosGrid />} />
 
-          {/* RUTA PROTEGIDA */}
+          {/* RUTAS PROTEGIDAS */}
           <Route
             path="/administrador"
             element={<ProtectedRoute element={<AdminEndpoints />} />}
           />
+          <Route
+            path="/informacion-view"
+            element={<ProtectedRoute element={<InformacionView />} />}
+          />
+          <Route
+            path="/servicios-view"
+            element={<ProtectedRoute element={<ServiciosView />} />}
+          />
+          <Route
+            path="/blog-view"
+            element={<ProtectedRoute element={<BlogView />} />}
+          />
+          <Route
+            path="/usuarios-view"
+            element={<ProtectedRoute element={<UsuariosView />} />}
+          />
 
-          <Route path="/informacion-view" element={<InformacionView />} />
-          <Route path="/servicios-view" element={<ServiciosView />} />
-          <Route path="/blog-view" element={<BlogView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           <Route path="*" element={<NotFoundPage />} />
