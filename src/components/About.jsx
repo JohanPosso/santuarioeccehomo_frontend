@@ -34,7 +34,7 @@ const About = () => {
             </a>
           </div>
           <div className="col-lg-6 col-md-6">
-            <img src={`${API}/image/${data.imagen_sec2}`} alt="services" />
+            <img src={`${data.imagen_sec2}`} alt="services" />
           </div>
         </div>
       </div>

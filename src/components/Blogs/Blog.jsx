@@ -45,7 +45,7 @@ const Blog = () => {
               >
                 <div className="blog-image">
                   <img
-                    src={`${API}/image/${blog.image}`}
+                    src={`${blog.image}`}
                     alt={blog.name}
                     onClick={() => handleReadMore(blog.id)} // Llamar la función handleReadMore
                   />

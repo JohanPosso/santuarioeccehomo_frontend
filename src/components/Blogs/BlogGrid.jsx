@@ -51,7 +51,7 @@ const BlogGrid = () => {
                   className="col-xl-4 col-lg-6 col-md-6"
                 >
                   <div className="blog-image">
-                    <img src={`${API}/image/${blog.image}`} alt={blog.name} />
+                    <img src={`${blog.image}`} alt={blog.name} />
                   </div>
                   <div className="text-block">
                     <div

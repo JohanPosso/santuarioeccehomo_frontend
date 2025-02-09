@@ -22,11 +22,7 @@ const Footer = () => {
           <div className="row row-gap-4">
             <div className="col-xl-4">
               <a href="">
-                <img
-                  src={`${API}/image/${data?.logo}`}
-                  alt="logo"
-                  className="header-logo"
-                />
+                <img src={`${data?.logo}`} alt="logo" className="header-logo" />
                 <p className="lightest-gray">
                   {data ? data.seccion_1descripcion : "Cargando..."}
                 </p>

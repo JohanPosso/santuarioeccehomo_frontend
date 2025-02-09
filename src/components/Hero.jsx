@@ -47,7 +47,7 @@ const Hero = () => {
               {data.imagen_sec1 && (
                 <img
                   style={{ width: 400 }}
-                  src={`${API}/image/${data.imagen_sec1}`} // Asegúrate de que la ruta sea correcta
+                  src={`${data.imagen_sec1}`} // Asegúrate de que la ruta sea correcta
                   alt="Imagen Sección 1"
                 />
               )}

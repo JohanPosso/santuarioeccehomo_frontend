@@ -76,7 +76,7 @@ const Blogview = () => {
   const imageBodyTemplate = (rowData) => {
     return (
       <img
-        src={`${API}/image/${rowData.image}`}
+        src={`${rowData.image}`}
         alt={rowData.name}
         style={{ width: "100px" }}
       />

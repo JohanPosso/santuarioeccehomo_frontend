@@ -46,7 +46,7 @@ const BlogDetalle = () => {
             <div className="col-xl-9">
               <div className="detail-section">
                 <div className="detail-image mb-24">
-                  <img src={`${API}/image/${blog.image}`} alt={blog.name} />
+                  <img src={`${blog.image}`} alt={blog.name} />
                 </div>
                 <h4 className="dark-gray fw-700 mb-24">{blog.name}</h4>
                 <p className="dark-gray mb-32">{blog.description}</p>
@@ -75,7 +75,7 @@ const BlogDetalle = () => {
                                   height: "100px", // Definimos una altura fija para las imágenes
                                   objectFit: "cover", // Mantiene la relación de aspecto pero corta las imágenes si es necesario
                                 }}
-                                src={`${API}/image/${item.image}`}
+                                src={`${item.image}`}
                                 alt={item.name}
                                 className="recent-blog-img"
                               />

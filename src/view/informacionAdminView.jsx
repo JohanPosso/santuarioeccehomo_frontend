@@ -210,11 +210,7 @@ const InformacionView = () => {
             <label>Logo</label>
             {data.logo && (
               <div>
-                <img
-                  src={`${API}/image/${data.logo}`}
-                  alt="Logo Actual"
-                  width="100"
-                />
+                <img src={`${data.logo}`} alt="Logo Actual" width="100" />
               </div>
             )}
             <FileUpload
@@ -251,7 +247,7 @@ const InformacionView = () => {
             {data.imagen_sec1 && (
               <div>
                 <img
-                  src={`${API}/image/${data.imagen_sec1}`}
+                  src={`${data.imagen_sec1}`}
                   alt="Imagen Sección 1"
                   width="100"
                 />
@@ -290,7 +286,7 @@ const InformacionView = () => {
             {data.imagen_sec2 && (
               <div>
                 <img
-                  src={`${API}/image/${data.imagen_sec2}`}
+                  src={`${data.imagen_sec2}`}
                   alt="Imagen Sección 2"
                   width="100"
                 />

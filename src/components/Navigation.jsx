@@ -26,11 +26,7 @@ const Navigation = () => {
     <nav className="navigation d-flex align-items-center justify-content-between">
       <Link to="/">
         {logo ? (
-          <img
-            src={`${API}/image/${logo}`}
-            alt="logo"
-            className="header-logo"
-          />
+          <img src={`${logo}`} alt="logo" className="header-logo" />
         ) : (
           <span>No hay logo disponible</span>
         )}
