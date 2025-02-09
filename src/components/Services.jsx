@@ -9,7 +9,8 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/media/services/service_2.png"
+                style={{ borderRadius: "200px", width: "70%" }}
+                src="/banner-1.jpg"
                 alt="Calendario de eventos"
                 className="mb-24"
               />
@@ -26,7 +27,8 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/media/services/service_3.png"
+                style={{ borderRadius: "200px", width: "70%" }}
+                src="/banner-2.jpg"
                 alt="Nuestros sacerdotes"
                 className="mb-24"
               />
@@ -43,7 +45,8 @@ const Services = () => {
           <div className="col-xl-4 col-md-6">
             <div className="text-center">
               <img
-                src="/media/services/service_4.png"
+                style={{ borderRadius: "200px", width: "50%" }}
+                src="/banner-3.jpg"
                 alt="Reflexiones y sermones"
                 className="mb-24"
               />

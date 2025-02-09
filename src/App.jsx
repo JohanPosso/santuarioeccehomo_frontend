@@ -26,6 +26,8 @@ import NotFoundPage from "./view/NotFoundPage";
 import LoginView from "./view/loginView";
 import SobreNosotros from "./components/SobreNosotros";
 import UsuariosView from "./view/UsuariosView";
+import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
+import DonacionesView from "./view/DonacionesView";
 
 import "./App.css";
 function AppContent() {
@@ -47,7 +49,7 @@ function AppContent() {
                 <ChooseUs />
                 <TeamSection />
                 <Blog />
-                <Gallery />
+                <PreguntasFrecuentes />
               </>
             }
           />
@@ -56,6 +58,8 @@ function AppContent() {
           <Route path="/blog-detalle/:id" element={<BlogDetalle />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/servicios" element={<ServiciosGrid />} />
+          <Route path="/galeria" element={<Gallery />} />
+          <Route path="/donaciones" element={<DonacionesView />} />
 
           {/* RUTAS PROTEGIDAS */}
           <Route

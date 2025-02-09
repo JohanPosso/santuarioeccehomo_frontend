@@ -37,19 +37,45 @@ const Footer = () => {
               <ul className="footer-list list-unstyled">
                 <li className="mb-8 white">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="blog-grid.html">Artículos</a>
+                  <Link to="/">Inicio</Link>
+                </li>
+                <li className="mb-8 white">
+                  <div className="col-xl-4 col-lg-6 col-md-6">
+                    <div className="d-flex gap-16 align-items-center">
+                      <div>
+                        <div className="col-xl-4 col-lg-6 col-md-6">
+                          <div className="d-flex gap-16 align-items-center">
+                            <a href={data?.facebook}>
+                              <span
+                                style={{ fontSize: 25 }}
+                                className="pi pi-facebook"
+                              ></span>
+                            </a>
+                            <a href={data?.instagram}>
+                              <span
+                                style={{ fontSize: 25 }}
+                                className="pi pi-instagram"
+                              ></span>
+                            </a>
+                            <a href={data?.twitter} target="_blank">
+                              <span
+                                style={{ fontSize: 25 }}
+                                className="pi pi-twitter"
+                              ></span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </li>
                 <li className="mb-8 white">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="">Preguntas Frecuentes</a>
-                </li>
-                <li className="mb-8 white">
-                  <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="contact.html">Contactos</a>
+                  <Link to="/sobre-nosotros">Sobre nosotros</Link>
                 </li>
                 <li className="white mb-8">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="">Colaboraciones</a>
+                  <Link to="/donaciones">Donaciones</Link>
                 </li>
               </ul>
             </div>
@@ -58,15 +84,15 @@ const Footer = () => {
               <ul className="footer-lists list-unstyled">
                 <li className="mb-8 white">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="blog-grid.html">Artículos</a>
+                  <Link to="/servicios">Servicios</Link>
                 </li>
                 <li className="mb-8 white">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="">Preguntas Frecuentes</a>
+                  <Link to="/contacto">Contacto</Link>
                 </li>
                 <li className="mb-8 white">
                   <img src="/media/user/christan2.png" alt="christan" />
-                  <a href="contact.html">Contactos</a>
+                  <Link to="/galeria">Galeria</Link>
                 </li>
                 <li className="white mb-8">
                   <img src="/media/user/christan2.png" alt="christan" />

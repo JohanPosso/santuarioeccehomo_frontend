@@ -72,28 +72,7 @@ const Contacto = () => {
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-lg-6 col-md-6">
-              <div className="d-flex gap-16 align-items-center">
-                <a href={data?.facebook}>
-                  <span
-                    style={{ fontSize: 60 }}
-                    className="pi pi-facebook"
-                  ></span>
-                </a>
-                <a href={data?.instagram}>
-                  <span
-                    style={{ fontSize: 60 }}
-                    className="pi pi-instagram"
-                  ></span>
-                </a>
-                <a href={data?.twitter}>
-                  <span
-                    style={{ fontSize: 60 }}
-                    className="pi pi-twitter"
-                  ></span>
-                </a>
-              </div>
-            </div>
+
             <div className="col-xl-4 col-lg-6 col-md-6">
               <div className="d-flex gap-16 align-items-center">
                 <div className="contact-link">
@@ -129,6 +108,35 @@ const Contacto = () => {
                 <div>
                   <h6 className="dark-gray fw-600 mb-6">Nuestra ubicacion</h6>
                   <p className="fw-400 mb-6 light-gray">{data.ubicacion}</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-4 col-lg-6 col-md-6">
+              <div className="d-flex gap-16 align-items-center">
+                <div>
+                  <h6 className="dark-gray fw-600 mb-6">Redes sociales</h6>
+                  <div className="col-xl-4 col-lg-6 col-md-6">
+                    <div className="d-flex gap-16 align-items-center">
+                      <a href={data?.facebook}>
+                        <span
+                          style={{ fontSize: 35 }}
+                          className="pi pi-facebook"
+                        ></span>
+                      </a>
+                      <a href={data?.instagram}>
+                        <span
+                          style={{ fontSize: 35 }}
+                          className="pi pi-instagram"
+                        ></span>
+                      </a>
+                      <a href={data?.twitter}>
+                        <span
+                          style={{ fontSize: 35 }}
+                          className="pi pi-twitter"
+                        ></span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

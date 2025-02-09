@@ -138,6 +138,70 @@ const InformacionView = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="col-12">
+              <label>Misión</label>
+              <textarea
+                className="form-control"
+                rows={5}
+                name="mision"
+                value={data.mision}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12">
+              <label>Visión</label>
+              <textarea
+                className="form-control"
+                rows={5}
+                name="vision"
+                value={data.vision}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12">
+              <label>Sobre Nosotros</label>
+              <textarea
+                className="form-control"
+                rows={5}
+                name="sobrenosotros"
+                value={data.sobrenosotros}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12">
+              <label>Reseña</label>
+              <textarea
+                className="form-control"
+                rows={5}
+                name="resena"
+                value={data.resena}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12 md:col-4">
+              <label>Facebook</label>
+              <InputText
+                name="facebook"
+                value={data.facebook}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12 md:col-4">
+              <label>Instagram</label>
+              <InputText
+                name="instagram"
+                value={data.instagram}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="col-12 md:col-4">
+              <label>Twitter</label>
+              <InputText
+                name="twitter"
+                value={data.twitter}
+                onChange={handleChange}
+              />
+            </div>
           </div>
         </Panel>
         {/* Panel para Logo */}

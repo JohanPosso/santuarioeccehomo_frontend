@@ -1,0 +1,86 @@
+/* Asegura que ocupe todo el alto y ancho de la pantalla */
+.donaciones-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+/* La tarjeta tiene un máximo de ancho de 600px pero se ajusta para pantallas más pequeñas */
+.donaciones-card {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 40px;
+  text-align: center;
+}
+
+/* Estilo para los textos */
+.donaciones-card h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.donaciones-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Botones con iconos */
+.donaciones-buttons .p-button {
+  font-size: 1rem;
+  padding: 12px 25px;
+  margin: 5px;
+}
+
+.donaciones-card .p-button-primary {
+  background-color: #009688;
+  border-color: #009688;
+}
+
+.donaciones-card .p-button-secondary {
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+}
+
+.donaciones-card .p-button-warning {
+  background-color: #ff9800;
+  border-color: #ff9800;
+}
+
+/* Estilo del tooltip */
+.donaciones-card .donar-tooltip {
+  display: inline-block;
+  font-size: 14px;
+  color: #00796b;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Asegurarse de que el layout sea responsive y que los botones se apilen en pantallas pequeñas */
+@media (max-width: 768px) {
+  .donaciones-card {
+    padding: 20px;
+  }
+
+  .donaciones-buttons {
+    flex-direction: column;
+  }
+
+  .donaciones-buttons .p-button {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .donaciones-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .donaciones-card p {
+    font-size: 0.9rem;
+  }
+}

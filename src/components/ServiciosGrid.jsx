@@ -39,13 +39,11 @@ const ServiciosGrid = () => {
             invitamos a ser parte de nuestra comunidad y vivir la fe en
             hermandad.
           </p>
-          <div className="row row-gap-4">
+
+          <div style={{ marginTop: "110px" }} className="row row-gap-4 ">
             {servicios.map((servicio) => (
               <div key={servicio.id} className="col-xl-3 col-md-6">
                 <div className="area-img mb-12">
-                  <a href="ministry-detail.html">
-                    <img src="/media/areas/area-1.png" alt="area" />
-                  </a>
                   <div className="img-bibble mb-12">
                     <img src="/media/user/bible.png" alt="pic" />
                   </div>

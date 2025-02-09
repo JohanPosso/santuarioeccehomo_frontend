@@ -6,10 +6,10 @@ const MassTime = () => {
       <div className="bg-time">
         <h2 className="white fw-700 mb-24">Horario de misas</h2>
         <h6 className="lightest-gray mb-16 fw-500">
-          Lunes - Sabado - 9:00 am & 11:00 am
+          Lunes - Sabado - 11:00 am
         </h6>
         <h6 className="lightest-gray mb-16 fw-500 mb-48">
-          Domingo 11:00 am, 4:00 pm
+          Domingo 9:00 am, 11:00 am, 4:00 pm
         </h6>
         <h3 className="white fw-700 mb-24">Horarios de confesion:</h3>
         <h6 className="lightest-gray mb-48 fw-500">

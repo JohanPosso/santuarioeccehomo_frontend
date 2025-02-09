@@ -34,9 +34,9 @@ const Hero = () => {
                   <Link to="/contacto" className="cus-btn">
                     <span className="btn-text">Contactatenos</span>
                   </Link>
-                  <a href="donation.html" className="cus-btn-2">
+                  <Link to="/donaciones" className="cus-btn-2">
                     <span className="btn-text">Donaciones</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
