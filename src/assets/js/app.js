@@ -26,12 +26,6 @@ var MyScroll = "";
     backToTop: function () {
       var scrollToTopBtn = document.querySelector(".scrollToTopBtn");
       var rootElement = document.documentElement;
-
-      if (!scrollToTopBtn) {
-        console.warn("Elemento .scrollToTopBtn no encontrado.");
-        return; // Salir de la función si el botón no está presente
-      }
-
       function handleScroll() {
         var scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
         if (rootElement.scrollTop / scrollTotal > 0.05) {
@@ -40,11 +34,9 @@ var MyScroll = "";
           scrollToTopBtn.classList.remove("showBtn");
         }
       }
-
       function scrollToTop() {
         rootElement.scrollTo({ top: 0, behavior: "smooth" });
       }
-
       scrollToTopBtn.addEventListener("click", scrollToTop);
       document.addEventListener("scroll", handleScroll);
     },
