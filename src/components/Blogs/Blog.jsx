@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importar useNavigate
-import axios from "axios"; // Usar axios en lugar de fetch
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate(); // Inicializar el hook useNavigate
+  const navigate = useNavigate();
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // Hacer la solicitud a la API con axios
     axios
       .get(`${API}/findblog`)
       .then((response) => {
-        setBlogs(response.data.reverse()); // Guardar los blogs en el estado
+        setBlogs(response.data.reverse());
       })
       .catch((error) => {
-        console.error("Error al obtener los blogs:", error); // Manejo de errores
+        console.error("Error al obtener los blogs:", error);
       });
   }, []);
 
   const handleReadMore = (id) => {
-    // Redirigir al detalle del blog
     navigate(`/blog-detalle/${id}`);
   };
 
@@ -37,7 +35,7 @@ const Blog = () => {
         </p>
         <div className="row row-gap-4 justify-content-center">
           {blogs.length > 0 ? (
-            blogs.map((blog) => (
+            blogs.slice(0, 3).map((blog) => (
               <div
                 key={blog.id}
                 style={{ overflow: "auto" }}
@@ -47,7 +45,7 @@ const Blog = () => {
                   <img
                     src={`${blog.image}`}
                     alt={blog.name}
-                    onClick={() => handleReadMore(blog.id)} // Llamar la función handleReadMore
+                    onClick={() => handleReadMore(blog.id)}
                   />
                 </div>
                 <div className="text-block">
@@ -55,7 +53,6 @@ const Blog = () => {
                     <p className="light-gray fw-400">
                       Creador por: {blog.link}
                     </p>
-
                     <p className="light-gray fw-400">
                       {new Date(blog.createdAt).toLocaleDateString("es-ES", {
                         day: "2-digit",
@@ -69,7 +66,7 @@ const Blog = () => {
                   <div className="d-flex gap-8 align-items-center">
                     <button
                       className="btn btn-outline-info"
-                      onClick={() => handleReadMore(blog.id)} // Llamar la función handleReadMore
+                      onClick={() => handleReadMore(blog.id)}
                     >
                       Leer más
                     </button>
@@ -103,7 +100,7 @@ const Blog = () => {
               </div>
             ))
           ) : (
-            <p>No hay blogs disponibles.</p> // Mensaje si no hay blogs
+            <p>No hay blogs disponibles.</p>
           )}
         </div>
       </div>

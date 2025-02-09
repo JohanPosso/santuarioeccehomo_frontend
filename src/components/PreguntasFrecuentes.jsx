@@ -4,7 +4,7 @@ const PreguntasFrecuentes = () => {
   return (
     <div className="accordion container mb-5" id="accordionExample">
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button"
             type="button"
@@ -15,22 +15,23 @@ const PreguntasFrecuentes = () => {
           >
             ¿Dónde se encuentra ubicado el Santuario del Santo Ecce Homo?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseOne"
           className="accordion-collapse collapse show"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
-            El santuario se encuentra ubicado en [nombre de la ubicación
-            exacta]. Es un lugar de gran significado religioso y cultural,
-            visitado por peregrinos de todo el mundo.
+            El santuario se encuentra ubicado en el Corregimiento Plan de
+            Raspadura, Municipio Unión Panamericana, Chocó. Es un lugar de gran
+            significado religioso y cultural, visitado por peregrinos de todo el
+            mundo.
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button collapsed"
             type="button"
@@ -41,22 +42,22 @@ const PreguntasFrecuentes = () => {
           >
             ¿Cuáles son los horarios de visita y de misas?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseTwo"
           className="accordion-collapse collapse"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
-            El santuario está abierto al público de [horario de apertura y
-            cierre]. Las misas se celebran en los siguientes horarios: [detallar
-            los horarios de las misas].
+            El santuario está abierto al público de Lunes - Sabado - 11:00 am
+            Domingo 9:00 am, 11:00 am, 4:00 pm. Las misas se celebran en esos
+            horarios.
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button collapsed"
             type="button"
@@ -67,22 +68,21 @@ const PreguntasFrecuentes = () => {
           >
             ¿Hay algún costo para entrar al santuario?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseThree"
           className="accordion-collapse collapse"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
-            La entrada al santuario es [gratuita/contribución voluntaria/costo
-            específico]. Sin embargo, se aceptan donaciones para el
-            mantenimiento y conservación del lugar.
+            La entrada al santuario es gratuita. Sin embargo, se aceptan
+            donaciones para el mantenimiento y conservación del lugar.
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button collapsed"
             type="button"
@@ -94,7 +94,7 @@ const PreguntasFrecuentes = () => {
             ¿Se pueden realizar eventos religiosos como bautizos o matrimonios
             en el santuario?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseFour"
           className="accordion-collapse collapse"
@@ -110,7 +110,7 @@ const PreguntasFrecuentes = () => {
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button collapsed"
             type="button"
@@ -121,7 +121,7 @@ const PreguntasFrecuentes = () => {
           >
             ¿Existen opciones de hospedaje cerca del santuario?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseFive"
           className="accordion-collapse collapse"
@@ -137,7 +137,7 @@ const PreguntasFrecuentes = () => {
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header">
+        <p className="accordion-header" style={{ fontWeight: "bold" }}>
           <button
             className="accordion-button collapsed"
             type="button"
@@ -148,7 +148,7 @@ const PreguntasFrecuentes = () => {
           >
             ¿El santuario cuenta con guías turísticos o recorridos especiales?
           </button>
-        </h2>
+        </p>
         <div
           id="collapseSix"
           className="accordion-collapse collapse"

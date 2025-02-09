@@ -11,7 +11,12 @@ import { TabMenu } from "primereact/tabmenu";
 
 const Blogview = () => {
   const [blogs, setBlogs] = useState([]);
-  const [blog, setBlog] = useState({ name: "", description: "", image: "" });
+  const [blog, setBlog] = useState({
+    name: "",
+    description: "",
+    image: "",
+    link: "",
+  });
   const [dialogVisible, setDialogVisible] = useState(false);
   const [editing, setEditing] = useState(false);
   const toast = React.useRef(null);
@@ -24,7 +29,7 @@ const Blogview = () => {
   }, []);
 
   const openNew = () => {
-    setBlog({ name: "", description: "", image: "" });
+    setBlog({ name: "", description: "", image: "", link: "" });
     setEditing(false);
     setDialogVisible(true);
   };
@@ -34,6 +39,7 @@ const Blogview = () => {
     formData.append("name", blog.name);
     formData.append("description", blog.description);
     formData.append("image", blog.image);
+    formData.append("link", blog.link);
 
     const url = editing ? `${API}/editblog/${blog.id}` : `${API}/createblog`;
     const method = editing ? "PUT" : "POST";
@@ -113,6 +119,7 @@ const Blogview = () => {
         >
           <Column field="name" header="Nombre" sortable />
           <Column field="description" header="Descripción" sortable />
+          <Column field="link" header="Creador" sortable />
           <Column body={imageBodyTemplate} header="Imagen" />
           <Column
             body={(rowData) => (
@@ -137,7 +144,12 @@ const Blogview = () => {
           onHide={() => setDialogVisible(false)}
         >
           <div className="p-fluid">
-            <label>Nombre</label>
+            <label>Creador</label>
+            <InputText
+              value={blog.link}
+              onChange={(e) => setBlog({ ...blog, link: e.target.value })}
+            />
+            <label>Titulo</label>
             <InputText
               value={blog.name}
               onChange={(e) => setBlog({ ...blog, name: e.target.value })}

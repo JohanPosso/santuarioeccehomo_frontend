@@ -47,6 +47,12 @@ const AdminEndpoints = () => {
       route: "/blog-view",
       icon: "pi pi-book",
     },
+    {
+      title: "Gestionar Galería",
+      description: "Sube fotos a la galeria.",
+      route: "/galeria-view",
+      icon: "pi pi-image",
+    },
   ];
 
   const handleNavigate = (route) => {
@@ -107,7 +113,9 @@ const AdminEndpoints = () => {
                 className={`${endpoint.icon} icon-style`}
                 style={{ fontSize: "2rem", marginBottom: "10px" }}
               />
-              <h3>{endpoint.title}</h3>
+              <p style={{ fontWeight: "bolder", fontSize: 17 }}>
+                {endpoint.title}
+              </p>
               <p>{endpoint.description}</p>
               <Button
                 label="Ir"

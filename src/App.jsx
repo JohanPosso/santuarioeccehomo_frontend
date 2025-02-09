@@ -28,8 +28,9 @@ import SobreNosotros from "./components/SobreNosotros";
 import UsuariosView from "./view/UsuariosView";
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
 import DonacionesView from "./view/DonacionesView";
-
+import SubirFotoView from "./view/SubirFotoView";
 import "./App.css";
+
 function AppContent() {
   return (
     <div className="tt-smooth-scroll">
@@ -81,6 +82,10 @@ function AppContent() {
           <Route
             path="/usuarios-view"
             element={<ProtectedRoute element={<UsuariosView />} />}
+          />
+          <Route
+            path="/galeria-view"
+            element={<ProtectedRoute element={<SubirFotoView />} />}
           />
 
           <Route path="/login" element={<LoginView />} />
