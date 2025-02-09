@@ -26,7 +26,7 @@ const DonacionesView = () => {
             {/* Columna para la foto del santuario */}
             <div className="p-col-12 p-md-6">
               <img
-                src="/public/media/services/services-1.png" // Coloca aquí la URL de la imagen del santuario
+                src="/media/services/services-1.png" // Coloca aquí la URL de la imagen del santuario
                 alt="Santuario"
                 className="donante-img"
                 style={{ borderRadius: "8px" }}

@@ -40,7 +40,7 @@ const ServiciosGrid = () => {
             hermandad.
           </p>
 
-          <div style={{ marginTop: "110px" }} className="row row-gap-4 ">
+          <div style={{ marginTop: "110px", gap: "5rem" }} className="row  ">
             {servicios.map((servicio) => (
               <div key={servicio.id} className="col-xl-3 col-md-6">
                 <div className="area-img mb-12">
