@@ -29,9 +29,9 @@ const About = () => {
               {data.seccion_2titulo}
             </h2>
             <p className="light-gray mb-16">{data.seccion_2descripcion}</p>
-            <a href="about.html" className="cus-btn">
+            <Link to="/sobre-nosotros" className="cus-btn">
               <span className="btn-text">Sobre nosotros</span>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-6 col-md-6">
             <img src={`${data.imagen_sec2}`} alt="services" />
