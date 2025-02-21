@@ -23,19 +23,19 @@ const Team = () => {
     <section className="areas py-80">
       <div className="container-fluid">
         <h2 className="medium-black fw-700 heading mb-16">Servicios</h2>
-        <p className="light-gray heading mb-48">
+        <p
+          style={{ marginBottom: "10rem" }}
+          className="light-gray heading mb-48"
+        >
           En nuestro santuario ofrecemos diversos servicios para acompañarte en
           tu camino de fe, desde celebraciones litúrgicas y confesiones hasta
           orientación espiritual y actividades comunitarias. Te invitamos a ser
           parte de nuestra comunidad y vivir la fe en hermandad.
         </p>
-        <div className="row row-gap-4">
+        <div style={{ gap: "7rem" }} className="row  mb-5">
           {services.map((service) => (
-            <div key={service.id} className="col-xl-3 col-md-6">
+            <div key={service.id} className="col-xl-3 col-md-6 ">
               <div className="area-img mb-12">
-                <a href="ministry.html">
-                  <img src={`/media/areas/area-${service.id}.png`} alt="area" />
-                </a>
                 <div className="img-bibble mb-12">
                   <img src="/media/user/bible.png" alt="pic" />
                 </div>
