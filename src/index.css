@@ -1,0 +1,5 @@
+@media (max-width: 500px) {
+  .vs-movil {
+    gap: 6rem !important;
+  }
+}

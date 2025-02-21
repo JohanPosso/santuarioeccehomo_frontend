@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 const Team = () => {
   const [services, setServices] = useState([]);
 
@@ -32,7 +31,7 @@ const Team = () => {
           orientación espiritual y actividades comunitarias. Te invitamos a ser
           parte de nuestra comunidad y vivir la fe en hermandad.
         </p>
-        <div style={{ gap: "7rem" }} className="row  mb-5">
+        <div className="row vs-movil row-gap-6 mb-5">
           {services.map((service) => (
             <div key={service.id} className="col-xl-3 col-md-6 ">
               <div className="area-img mb-12">
