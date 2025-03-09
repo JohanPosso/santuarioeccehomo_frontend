@@ -27,6 +27,12 @@ const TeamSection = () => {
               name: "Surley Mosquera",
               role: "Secretaria parroquial",
             },
+            {
+              id: 3,
+              imgSrc: "/parroco2.jpg",
+              name: "Marlon Andres Ventura",
+              role: "Párroco",
+            },
           ].map((leader) => (
             <div key={leader.id} className="col-xl-3 col-lg-6 col-md-6">
               <div className="team-img mb-24" style={{ textAlign: "center" }}>
