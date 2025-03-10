@@ -17,18 +17,12 @@ const TeamSection = () => {
           {[
             {
               id: 1,
-              imgSrc: "/parroco.jpg",
-              name: "Jorge Ernesto Zapata",
-              role: "Párroco",
-            },
-            {
-              id: 2,
               imgSrc: "/secretaria-santuario.jpg",
               name: "Surley Mosquera",
               role: "Secretaria parroquial",
             },
             {
-              id: 3,
+              id: 2,
               imgSrc: "/parroco2.jpg",
               name: "Marlon Andres Ventura",
               role: "Párroco",
