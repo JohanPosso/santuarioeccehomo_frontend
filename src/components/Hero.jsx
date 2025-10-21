@@ -1,58 +1,138 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import axios from "axios";
+import { Heart, Mail, ArrowRight, Church } from "lucide-react";
 
 const Hero = () => {
   const [data, setData] = useState(null);
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    axios
-      .get(`${API}/find-data`)
-      .then((response) => {
-        setData(response.data[0]);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
+    axios.get(`${API}/find-data`)
+      .then((res) => setData(res.data[0]))
+      .catch((err) => console.error(err));
   }, []);
 
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  if (!data) return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="w-12 h-12 border-4 border-amber-600 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
 
   return (
-    <section className="hero-banner">
-      <div className="container-fluid">
-        <div className="row align-items-center row-gap-5 justify-content-center">
-          <div className="col-xl-7 col-lg-12 col-md-12">
-            <div className="left-block">
-              <h2 className="white mb-16">{data.seccion_1titulo}</h2>
-              <p className="lightest-gray mb-32">{data.seccion_1descripcion}</p>
-              <div className="d-flex gap-16 flex-wrap">
-                <div className="d-flex gap-12 blocks">
-                  <Link to="/contacto" className="cus-btn">
-                    <span className="btn-text">Contactatenos</span>
-                  </Link>
-                  <Link to="/donaciones" className="cus-btn-2">
-                    <span className="btn-text">Donaciones</span>
-                  </Link>
-                </div>
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-white to-amber-50/30 pt-20 overflow-hidden">
+      
+      {/* Elementos decorativos de fondo */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-12 lg:py-20 w-full relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* Contenido de texto */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-800 rounded-full mb-6"
+            >
+              <Church size={16} />
+              <span className="text-xs font-semibold uppercase tracking-wider">Bienvenido a Nuestro Santuario</span>
+            </motion.div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-tight font-sans">
+              {data.seccion_1titulo}
+            </h1>
+            
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
+              {data.seccion_1descripcion}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link 
+                to="/contacto"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl"
+              >
+                <Mail size={18} />
+                Contáctanos
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              
+              <Link 
+                to="/donaciones"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-full font-medium hover:from-amber-600 hover:to-amber-700 transition-all shadow-lg hover:shadow-xl"
+              >
+                <Heart size={18} />
+                Hacer una Donación
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">50+</div>
+                <div className="text-sm text-gray-600">Años de Historia</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">1K+</div>
+                <div className="text-sm text-gray-600">Fieles</div>
+              </div>
+              <div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">100+</div>
+                <div className="text-sm text-gray-600">Eventos</div>
               </div>
             </div>
-          </div>
-          <div className="col-xl-5 col-lg-12 col-md-9 col-sm-10">
-            <div className="right-block">
-              {/* Mostrar la imagen de la sección 1 desde el backend */}
-              {data.imagen_sec1 && (
+          </motion.div>
+
+          {/* Imagen */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative">
+              {/* Imagen principal */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  style={{ width: 400 }}
-                  src={`${data.imagen_sec1}`} // Asegúrate de que la ruta sea correcta
-                  alt="Imagen Sección 1"
+                  src={data.imagen_sec1}
+                  alt="Santuario"
+                  className="w-full h-[400px] sm:h-[500px] lg:h-[600px] object-cover"
                 />
-              )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+              </div>
+
+              {/* Decoraciones */}
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-amber-400/30 rounded-full blur-2xl" />
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl" />
+
+              {/* Card flotante */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="absolute -bottom-6 left-6 right-6 sm:left-8 sm:right-auto sm:w-64 bg-white rounded-2xl p-5 shadow-2xl"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Heart className="text-white" size={24} />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-gray-900">Te Esperamos</div>
+                    <div className="text-xs text-gray-600">Únete a nuestra comunidad</div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

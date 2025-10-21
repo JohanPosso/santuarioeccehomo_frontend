@@ -1,7 +1,8 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./components/ProtectedRoute"; // Importa el componente
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { UserProvider } from "./contexts/UserContext";
+
+// Componentes principales
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -9,32 +10,47 @@ import Services from "./components/Services";
 import Events from "./components/Events";
 import Team from "./components/Team";
 import Blog from "./components/Blogs/Blog";
-import Gallery from "./components/Gallery";
 import Footer from "./components/Footer";
 import MassTime from "./components/MassTime";
-import ChooseUs from "./components/ChooseUs";
-import TeamSection from "./components/TeamSection";
-import BlogGrid from "./components/Blogs/BlogGrid";
+import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
+import PersonalSection from "./components/PersonalSection";
+
+// Páginas
+import BlogGridModerno from "./components/Blogs/BlogGridModerno";
 import BlogDetalle from "./components/Blogs/BlogDetalle";
-import Contacto from "./components/Contacto";
-import ServiciosGrid from "./components/ServiciosGrid";
+import ContactoModerno from "./components/ContactoModerno";
+import ServiciosGridModerno from "./components/ServiciosGridModerno";
+import SobreNosotrosModerno from "./components/SobreNosotrosModerno";
+import GaleriaView from "./view/GaleriaView";
+import DonacionesView from "./view/DonacionesView";
+
+// Admin
 import AdminEndpoints from "./components/AdminView";
 import InformacionView from "./view/informacionAdminView";
 import ServiciosView from "./view/serviciosAdminView";
 import BlogView from "./view/blogAdminView";
-import NotFoundPage from "./view/NotFoundPage";
-import LoginView from "./view/loginView";
-import SobreNosotros from "./components/SobreNosotros";
 import UsuariosView from "./view/UsuariosView";
-import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
-import DonacionesView from "./view/DonacionesView";
-import SubirFotoView from "./view/SubirFotoView";
+import GaleriaAdminView from "./view/GaleriaAdminView";
+import LoginView from "./view/loginView";
+import NotFoundPage from "./view/NotFoundPage";
+import PersonalAdminView from "./view/PersonalAdminView";
+import HorariosAdminView from "./view/HorariosAdminView";
+import CalendarioAdminView from "./view/CalendarioAdminView";
+import CalendarioView from "./view/CalendarioView";
+
 import "./App.css";
 
 function AppContent() {
+  const location = useLocation();
+  
+  // Rutas que no deben mostrar Header y Footer
+  const isAdminRoute = location.pathname.includes('/administrador') || 
+                       location.pathname.includes('-view') || 
+                       location.pathname === '/login';
+
   return (
-    <div className="tt-smooth-scroll">
-      <Header />
+    <div>
+      {!isAdminRoute && <Header />}
       <main>
         <Routes>
           <Route
@@ -45,55 +61,40 @@ function AppContent() {
                 <About />
                 <Services />
                 <Events />
+                <PersonalSection />
                 <Team />
                 <MassTime />
-                <ChooseUs />
-                <TeamSection />
                 <Blog />
                 <PreguntasFrecuentes />
               </>
             }
           />
-          <Route path="/blogs" element={<BlogGrid />} />
-          <Route path="/blog-detalle" element={<BlogDetalle />} />
+          
+          <Route path="/blogs" element={<BlogGridModerno />} />
           <Route path="/blog-detalle/:id" element={<BlogDetalle />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/servicios" element={<ServiciosGrid />} />
-          <Route path="/galeria" element={<Gallery />} />
+          <Route path="/contacto" element={<ContactoModerno />} />
+          <Route path="/servicios" element={<ServiciosGridModerno />} />
+          <Route path="/galeria" element={<GaleriaView />} />
           <Route path="/donaciones" element={<DonacionesView />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotrosModerno />} />
+          <Route path="/calendario" element={<CalendarioView />} />
 
-          {/* RUTAS PROTEGIDAS */}
-          <Route
-            path="/administrador"
-            element={<ProtectedRoute element={<AdminEndpoints />} />}
-          />
-          <Route
-            path="/informacion-view"
-            element={<ProtectedRoute element={<InformacionView />} />}
-          />
-          <Route
-            path="/servicios-view"
-            element={<ProtectedRoute element={<ServiciosView />} />}
-          />
-          <Route
-            path="/blog-view"
-            element={<ProtectedRoute element={<BlogView />} />}
-          />
-          <Route
-            path="/usuarios-view"
-            element={<ProtectedRoute element={<UsuariosView />} />}
-          />
-          <Route
-            path="/galeria-view"
-            element={<ProtectedRoute element={<SubirFotoView />} />}
-          />
-
+          {/* Admin Routes */}
+          <Route path="/administrador" element={<ProtectedRoute element={<AdminEndpoints />} />} />
+          <Route path="/informacion-view" element={<ProtectedRoute element={<InformacionView />} />} />
+          <Route path="/servicios-view" element={<ProtectedRoute element={<ServiciosView />} />} />
+          <Route path="/blog-view" element={<ProtectedRoute element={<BlogView />} />} />
+          <Route path="/usuarios-view" element={<ProtectedRoute element={<UsuariosView />} />} />
+          <Route path="/galeria-view" element={<ProtectedRoute element={<GaleriaAdminView />} />} />
+          <Route path="/personal-view" element={<ProtectedRoute element={<PersonalAdminView />} />} />
+          <Route path="/horarios-view" element={<ProtectedRoute element={<HorariosAdminView />} />} />
+          <Route path="/calendario-view" element={<ProtectedRoute element={<CalendarioAdminView />} />} />
           <Route path="/login" element={<LoginView />} />
-          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+          
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }

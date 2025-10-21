@@ -1,95 +1,93 @@
-import { useState, useEffect } from "react";
-import { BookOpen, Plus, Edit2, Trash2, X, Upload, Home } from "lucide-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Clock, Plus, Edit2, Trash2, X, Star, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Blogview = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [blog, setBlog] = useState({
-    name: "",
-    description: "",
-    image: "",
-    link: "",
+const HorariosAdminView = () => {
+  const [horarios, setHorarios] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    id: null,
+    tipo: "misa",
+    dia: "",
+    hora: "",
+    descripcion: "",
+    destacado: false,
+    orden: 0,
   });
-  const [dialogVisible, setDialogVisible] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
   const itemsPerPage = 10;
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${API}/findblog`)
-      .then((response) => response.json())
-      .then((data) => setBlogs(data));
+    fetchHorarios();
   }, []);
+
+  const fetchHorarios = () => {
+    axios.get(`${API}/find-horarios`)
+      .then((res) => setHorarios(res.data))
+      .catch((err) => console.error(err));
+  };
 
   const showToast = (message, type) => {
     setToast({ show: true, message, type });
     setTimeout(() => setToast({ show: false, message: "", type: "" }), 3000);
   };
 
-  const openNew = () => {
-    setBlog({ name: "", description: "", image: "", link: "" });
-    setSelectedFile(null);
-    setPreviewUrl(null);
-    setEditing(false);
-    setDialogVisible(true);
-  };
+  const handleSave = async () => {
+    try {
+      if (isEditing) {
+        await axios.put(`${API}/update-horario/${formData.id}`, formData);
+        showToast("Horario actualizado", "success");
+      } else {
+        await axios.post(`${API}/crear-horario`, formData);
+        showToast("Horario creado", "success");
+      }
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-      setBlog({ ...blog, image: file });
-      setPreviewUrl(URL.createObjectURL(file));
+      closeModal();
+      fetchHorarios();
+    } catch (error) {
+      console.error(error);
+      showToast("Error al guardar", "error");
     }
   };
 
-  const saveBlog = async () => {
-    const formData = new FormData();
-    formData.append("name", blog.name);
-    formData.append("description", blog.description);
-    formData.append("image", blog.image);
-    formData.append("link", blog.link);
-
-    const url = editing ? `${API}/editblog/${blog.id}` : `${API}/createblog`;
-    const method = editing ? "PUT" : "POST";
-
-    await fetch(url, {
-      method,
-      body: formData,
-    });
-
-    showToast(`Blog ${editing ? "actualizado" : "creado"}`, "success");
-    setDialogVisible(false);
-    window.location.reload();
-  };
-
-  const deleteBlog = async (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este artículo?")) {
-      await fetch(`${API}/deleteblog/${id}`, {
-        method: "DELETE",
-      });
-
-      showToast("Blog eliminado", "success");
-      setBlogs(blogs.filter((b) => b.id !== id));
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de eliminar este horario?")) {
+      try {
+        await axios.delete(`${API}/delete-horario/${id}`);
+        setHorarios(horarios.filter((h) => h.id !== id));
+        showToast("Horario eliminado", "success");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
-  const editBlog = (rowData) => {
-    setBlog(rowData);
-    setPreviewUrl(rowData.image);
-    setEditing(true);
-    setDialogVisible(true);
+  const openEditModal = (horario) => {
+    setFormData(horario);
+    setIsEditing(true);
+    setShowModal(true);
+  };
+
+  const openNewModal = () => {
+    setFormData({ id: null, tipo: "misa", dia: "", hora: "", descripcion: "", destacado: false, orden: 0 });
+    setIsEditing(false);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setFormData({ id: null, tipo: "misa", dia: "", hora: "", descripcion: "", destacado: false, orden: 0 });
   };
 
   // Paginación
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(blogs.length / itemsPerPage);
+  const currentItems = horarios.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(horarios.length / itemsPerPage);
 
   return (
     <div>
@@ -103,7 +101,7 @@ const Blogview = () => {
               <Home size={18} />
               <span className="hidden sm:inline">Volver al Inicio</span>
             </Link>
-            <h1 className="white fw-700 text-center flex-1">Gestión de Blog</h1>
+            <h1 className="white fw-700 text-center flex-1">Gestión de Horarios</h1>
             <div className="w-32 sm:w-40"></div>
           </div>
         </div>
@@ -121,8 +119,8 @@ const Blogview = () => {
 
         {/* Navegación */}
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-600">
-          <BookOpen size={18} />
-          <span>Blog</span>
+          <Clock size={18} />
+          <span>Horarios</span>
           <span>/</span>
           <a href="/administrador" className="hover:text-gray-900">Administración</a>
         </div>
@@ -130,15 +128,15 @@ const Blogview = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-6 border-b border-gray-200 flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Artículos del Blog</h2>
-              <p className="text-sm text-gray-600 mt-1">Administra publicaciones y reflexiones</p>
+              <h2 className="text-2xl font-bold text-gray-900">Horarios de Misas y Confesiones</h2>
+              <p className="text-sm text-gray-600 mt-1">Administra los horarios del santuario</p>
             </div>
             <button
-              onClick={openNew}
+              onClick={openNewModal}
               className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
               <Plus size={18} />
-              Nuevo Artículo
+              Nuevo Horario
             </button>
           </div>
 
@@ -148,13 +146,19 @@ const Blogview = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Imagen
+                    Tipo
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Título
+                    Día
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Autor
+                    Hora
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    Descripción
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    Destacado
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Acciones
@@ -166,27 +170,29 @@ const Blogview = () => {
                   currentItems.map((row, index) => (
                     <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4">
-                        <img
-                          src={row.image}
-                          alt={row.name}
-                          className="w-16 h-16 rounded-lg object-cover"
-                        />
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          row.tipo === 'misa' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'
+                        }`}>
+                          {row.tipo === 'misa' ? 'Misa' : 'Confesión'}
+                        </span>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900 max-w-xs">
-                        <div className="line-clamp-2">{row.name}</div>
+                      <td className="px-6 py-4 text-sm text-gray-900">{row.dia}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{row.hora}</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">{row.descripcion}</td>
+                      <td className="px-6 py-4 text-center">
+                        {row.destacado && <Star size={18} className="inline text-amber-500 fill-amber-500" />}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-700">{row.link}</td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
                           <button
-                            onClick={() => editBlog(row)}
+                            onClick={() => openEditModal(row)}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Editar"
                           >
                             <Edit2 size={18} />
                           </button>
                           <button
-                            onClick={() => deleteBlog(row.id)}
+                            onClick={() => handleDelete(row.id)}
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                             title="Eliminar"
                           >
@@ -198,8 +204,8 @@ const Blogview = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
-                      No hay artículos publicados
+                    <td colSpan="6" className="px-6 py-8 text-center text-gray-500">
+                      No hay horarios registrados
                     </td>
                   </tr>
                 )}
@@ -211,7 +217,7 @@ const Blogview = () => {
           {totalPages > 1 && (
             <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
               <p className="text-sm text-gray-600">
-                Mostrando {indexOfFirstItem + 1} a {Math.min(indexOfLastItem, blogs.length)} de {blogs.length} artículos
+                Mostrando {indexOfFirstItem + 1} a {Math.min(indexOfLastItem, horarios.length)} de {horarios.length}
               </p>
               <div className="flex gap-2">
                 <button
@@ -247,15 +253,15 @@ const Blogview = () => {
         </div>
 
         {/* Modal */}
-        {dialogVisible && (
+        {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6 border-b border-gray-200 flex justify-between items-center">
                 <h3 className="text-xl font-bold text-gray-900">
-                  {editing ? "Editar Artículo" : "Nuevo Artículo"}
+                  {isEditing ? "Editar Horario" : "Nuevo Horario"}
                 </h3>
                 <button
-                  onClick={() => setDialogVisible(false)}
+                  onClick={closeModal}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X size={20} />
@@ -263,86 +269,103 @@ const Blogview = () => {
               </div>
 
               <div className="p-6 space-y-4">
+                {/* Tipo */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Autor/Creador
+                    Tipo *
+                  </label>
+                  <select
+                    value={formData.tipo}
+                    onChange={(e) => setFormData({ ...formData, tipo: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  >
+                    <option value="misa">Misa</option>
+                    <option value="confesion">Confesión</option>
+                  </select>
+                </div>
+
+                {/* Día */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Día *
                   </label>
                   <input
                     type="text"
-                    value={blog.link}
-                    onChange={(e) => setBlog({ ...blog, link: e.target.value })}
+                    value={formData.dia}
+                    onChange={(e) => setFormData({ ...formData, dia: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    placeholder="Nombre del autor"
+                    placeholder="Ej: Lunes a Viernes, Domingos"
                   />
                 </div>
 
+                {/* Hora */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Título del Artículo
+                    Hora *
                   </label>
                   <input
                     type="text"
-                    value={blog.name}
-                    onChange={(e) => setBlog({ ...blog, name: e.target.value })}
+                    value={formData.hora}
+                    onChange={(e) => setFormData({ ...formData, hora: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    placeholder="Título llamativo"
+                    placeholder="Ej: 7:00 AM, 6:00 PM"
                   />
                 </div>
 
+                {/* Descripción */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Descripción/Contenido
+                    Descripción (Opcional)
                   </label>
                   <textarea
-                    value={blog.description}
-                    onChange={(e) => setBlog({ ...blog, description: e.target.value })}
-                    rows={6}
+                    value={formData.descripcion}
+                    onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
+                    rows={3}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
-                    placeholder="Contenido del artículo..."
+                    placeholder="Información adicional..."
                   />
                 </div>
 
+                {/* Orden */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Imagen de Portada
+                    Orden
                   </label>
-                  
-                  {previewUrl && (
-                    <div className="mb-3 p-3 bg-gray-50 rounded-lg">
-                      <p className="text-sm font-semibold mb-2">Imagen Actual:</p>
-                      <img src={previewUrl} alt="Preview" className="max-w-xs rounded-lg" />
-                    </div>
-                  )}
-                  
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
-                    <Upload className="mx-auto mb-2 text-gray-400" size={32} />
-                    <label className="cursor-pointer">
-                      <span className="text-sm text-gray-600">
-                        Haz clic para seleccionar o arrastra una imagen
-                      </span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="hidden"
-                      />
-                    </label>
-                  </div>
+                  <input
+                    type="number"
+                    value={formData.orden}
+                    onChange={(e) => setFormData({ ...formData, orden: parseInt(e.target.value) })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+
+                {/* Destacado */}
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formData.destacado}
+                    onChange={(e) => setFormData({ ...formData, destacado: e.target.checked })}
+                    className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900"
+                  />
+                  <label className="ml-2 text-sm text-gray-700">
+                    Marcar como destacado
+                  </label>
                 </div>
               </div>
 
               <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
                 <button
-                  onClick={() => setDialogVisible(false)}
+                  onClick={closeModal}
                   className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
-                  onClick={saveBlog}
+                  onClick={handleSave}
                   className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
                 >
-                  {editing ? "Actualizar" : "Publicar"}
+                  {isEditing ? "Actualizar" : "Guardar"}
                 </button>
               </div>
             </div>
@@ -353,4 +376,4 @@ const Blogview = () => {
   );
 };
 
-export default Blogview;
+export default HorariosAdminView;

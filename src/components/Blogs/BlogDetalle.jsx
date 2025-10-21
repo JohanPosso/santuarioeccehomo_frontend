@@ -1,104 +1,200 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import axios from "axios";
+import { Calendar, User, ArrowLeft, BookOpen, Clock } from "lucide-react";
 
 const BlogDetalle = () => {
-  const { id } = useParams(); // Obtener el id de la URL
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [blog, setBlog] = useState(null);
-  const [latestBlogs, setLatestBlogs] = useState([]); // Estado para los artículos recientes
+  const [latestBlogs, setLatestBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const API = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    // Hacer la solicitud para obtener el blog por su id
-    axios
-      .get(`${API}/findblog/${id}`)
+    setLoading(true);
+    
+    axios.get(`${API}/findblog/${id}`)
       .then((response) => {
         setBlog(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error al obtener el blog:", error);
+        setLoading(false);
       });
 
-    // Solicitar los últimos blogs (esto puede ajustarse según tu API)
-    axios
-      .get(`${API}/findblog`)
+    axios.get(`${API}/findblog`)
       .then((response) => {
-        setLatestBlogs(response.data.reverse()); // Guardar los blogs en el estado
+        setLatestBlogs(response.data.reverse().filter(b => b.id !== parseInt(id)).slice(0, 5));
       })
       .catch((error) => {
         console.error("Error al obtener los últimos blogs:", error);
       });
   }, [id]);
 
-  console.log("latestBlogs: ", latestBlogs); // Verifica cómo están los blogs en el estado
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-gray-900 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Cargando artículo...</p>
+        </div>
+      </div>
+    );
+  }
 
-  if (!blog) return <div>Loading...</div>;
+  if (!blog) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <p className="text-gray-600 mb-4">Artículo no encontrado</p>
+          <button
+            onClick={() => navigate("/blogs")}
+            className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
+          >
+            Volver a blogs
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <section className="title-banner">
-        <div className="container-fluid">
-          <h1 className="white fw-700 text-center">Blog Detalle</h1>
+    <div className="min-h-screen bg-gray-50">
+      
+      {/* Hero con imagen de portada */}
+      <section className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
+        <div className="absolute inset-0">
+          <img
+            src={blog.image}
+            alt={blog.name}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+        </div>
+        
+        <div className="relative h-full flex items-end">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full pb-12 sm:pb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <button
+                onClick={() => navigate("/blogs")}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-colors mb-6"
+              >
+                <ArrowLeft size={18} />
+                Volver a Blogs
+              </button>
+              
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+                {blog.name}
+              </h1>
+              
+              <div className="flex flex-wrap gap-4 text-white/90">
+                <div className="flex items-center gap-2">
+                  <User size={18} />
+                  <span>{blog.link || "Autor"}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar size={18} />
+                  <span>{blog.date || new Date().toLocaleDateString('es-ES')}</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
-      <section className="blog-sec py-80">
-        <div className="container-fluid">
-          <div className="row row-gap-4">
-            <div className="col-xl-9">
-              <div className="detail-section">
-                <div className="detail-image mb-24">
-                  <img src={`${blog.image}`} alt={blog.name} />
+
+      {/* Contenido */}
+      <section className="py-16 sm:py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid lg:grid-cols-3 gap-12">
+            
+            {/* Artículo principal */}
+            <div className="lg:col-span-2">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-2xl shadow-xl p-8 sm:p-10 lg:p-12"
+              >
+                <article className="prose prose-lg max-w-none">
+                  <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    {blog.description}
+                  </div>
+                  {blog.content && (
+                    <div className="mt-8 text-gray-700 leading-relaxed whitespace-pre-line">
+                      {blog.content}
+                    </div>
+                  )}
+                </article>
+
+                {/* Separador */}
+                <div className="mt-12 pt-8 border-t border-gray-200">
+                  <div className="flex items-center gap-3 text-gray-600">
+                    <BookOpen size={20} />
+                    <span className="text-sm">Publicado por {blog.link || "Santuario Ecce Homo"}</span>
+                  </div>
                 </div>
-                <h4 className="dark-gray fw-700 mb-24">{blog.name}</h4>
-                <p className="dark-gray mb-32">{blog.description}</p>
-                <p className="dark-gray mb-32">{blog.content}</p>
-                {/* Agregar más detalles según el contenido */}
-              </div>
+              </motion.div>
             </div>
 
-            {/* Sección de artículos recientes */}
-            <div className="col-xl-3">
-              <div className="block-3 mb-24">
-                <h5 className="medium-black mb-16 fw-700">Ultimos articulos</h5>
-                <div className="hr-line mb-16"></div>
-                <div>
+            {/* Sidebar - Artículos recientes */}
+            <div className="lg:col-span-1">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="sticky top-4"
+              >
+                <div className="bg-white rounded-2xl shadow-xl p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <Clock size={20} className="text-amber-500" />
+                    Artículos Recientes
+                  </h3>
+                  
                   {latestBlogs.length > 0 ? (
-                    latestBlogs.slice(0, 4).map(
-                      (
-                        item // Invertimos el array y luego limitamos a las primeras 4 publicaciones
-                      ) => (
-                        <a href={`/blog-detalle/${item.id}`} key={item.id}>
-                          <div className="recent-blog mb-32">
-                            <div className="d-flex gap-12">
-                              <img
-                                style={{
-                                  width: "100px", // El ancho se ajustará al 100% del contenedor
-                                  height: "100px", // Definimos una altura fija para las imágenes
-                                  objectFit: "cover", // Mantiene la relación de aspecto pero corta las imágenes si es necesario
-                                }}
-                                src={`${item.image}`}
-                                alt={item.name}
-                                className="recent-blog-img"
-                              />
-                              <div className="blocks">
-                                <p className="light-gray mb-8">
-                                  {item.name.length > 30
-                                    ? `${item.name.slice(0, 30)}...`
-                                    : item.name}
-                                </p>
-                                <p className="subtitle dark-gray">
-                                  {item.date}
-                                </p>
-                              </div>
+                    <div className="space-y-4">
+                      {latestBlogs.map((item) => (
+                        <a
+                          key={item.id}
+                          href={`/blog-detalle/${item.id}`}
+                          className="group block"
+                        >
+                          <div className="flex gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-20 h-20 object-cover rounded-lg flex-shrink-0 group-hover:scale-105 transition-transform"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-gray-900 text-sm mb-1 line-clamp-2 group-hover:text-amber-600 transition-colors">
+                                {item.name}
+                              </h4>
+                              <p className="text-xs text-gray-500">
+                                {item.date || new Date().toLocaleDateString('es-ES')}
+                              </p>
                             </div>
                           </div>
                         </a>
-                      )
-                    )
+                      ))}
+                    </div>
                   ) : (
-                    <p>No recent articles available.</p>
+                    <p className="text-gray-500 text-sm">No hay artículos recientes disponibles.</p>
                   )}
+
+                  <button
+                    onClick={() => navigate("/blogs")}
+                    className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white font-semibold rounded-lg hover:from-gray-800 hover:to-gray-700 transition-all"
+                  >
+                    Ver Todos los Artículos
+                  </button>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

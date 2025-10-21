@@ -1,95 +1,117 @@
-import { useState, useEffect } from "react";
-import { BookOpen, Plus, Edit2, Trash2, X, Upload, Home } from "lucide-react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { UserCircle, Plus, Edit2, Trash2, X, Upload, Eye, EyeOff, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Blogview = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [blog, setBlog] = useState({
-    name: "",
-    description: "",
-    image: "",
-    link: "",
+const PersonalAdminView = () => {
+  const [personal, setPersonal] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    id: null,
+    nombre: "",
+    cargo: "",
+    foto: null,
+    orden: 0,
+    activo: true,
   });
-  const [dialogVisible, setDialogVisible] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [toast, setToast] = useState({ show: false, message: "", type: "" });
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${API}/findblog`)
-      .then((response) => response.json())
-      .then((data) => setBlogs(data));
+    fetchPersonal();
   }, []);
+
+  const fetchPersonal = () => {
+    axios.get(`${API}/find-all-personal`)
+      .then((res) => setPersonal(res.data))
+      .catch((err) => console.error(err));
+  };
 
   const showToast = (message, type) => {
     setToast({ show: true, message, type });
     setTimeout(() => setToast({ show: false, message: "", type: "" }), 3000);
   };
 
-  const openNew = () => {
-    setBlog({ name: "", description: "", image: "", link: "" });
-    setSelectedFile(null);
-    setPreviewUrl(null);
-    setEditing(false);
-    setDialogVisible(true);
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file);
-      setBlog({ ...blog, image: file });
       setPreviewUrl(URL.createObjectURL(file));
     }
   };
 
-  const saveBlog = async () => {
-    const formData = new FormData();
-    formData.append("name", blog.name);
-    formData.append("description", blog.description);
-    formData.append("image", blog.image);
-    formData.append("link", blog.link);
+  const handleSave = async () => {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("nombre", formData.nombre);
+      formDataToSend.append("cargo", formData.cargo);
+      formDataToSend.append("orden", formData.orden);
+      formDataToSend.append("activo", formData.activo);
+      
+      if (selectedFile) {
+        formDataToSend.append("foto", selectedFile);
+      }
 
-    const url = editing ? `${API}/editblog/${blog.id}` : `${API}/createblog`;
-    const method = editing ? "PUT" : "POST";
+      if (isEditing) {
+        await axios.put(`${API}/update-personal/${formData.id}`, formDataToSend);
+        showToast("Personal actualizado", "success");
+      } else {
+        await axios.post(`${API}/crear-personal`, formDataToSend);
+        showToast("Personal creado", "success");
+      }
 
-    await fetch(url, {
-      method,
-      body: formData,
-    });
-
-    showToast(`Blog ${editing ? "actualizado" : "creado"}`, "success");
-    setDialogVisible(false);
-    window.location.reload();
-  };
-
-  const deleteBlog = async (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este artículo?")) {
-      await fetch(`${API}/deleteblog/${id}`, {
-        method: "DELETE",
-      });
-
-      showToast("Blog eliminado", "success");
-      setBlogs(blogs.filter((b) => b.id !== id));
+      closeModal();
+      fetchPersonal();
+    } catch (error) {
+      console.error(error);
+      showToast("Error al guardar", "error");
     }
   };
 
-  const editBlog = (rowData) => {
-    setBlog(rowData);
-    setPreviewUrl(rowData.image);
-    setEditing(true);
-    setDialogVisible(true);
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Estás seguro de eliminar este personal?")) {
+      try {
+        await axios.delete(`${API}/delete-personal/${id}`);
+        setPersonal(personal.filter((p) => p.id !== id));
+        showToast("Personal eliminado", "success");
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  const openEditModal = (persona) => {
+    setFormData(persona);
+    setPreviewUrl(persona.foto || null);
+    setIsEditing(true);
+    setShowModal(true);
+  };
+
+  const openNewModal = () => {
+    setFormData({ id: null, nombre: "", cargo: "", foto: null, orden: 0, activo: true });
+    setSelectedFile(null);
+    setPreviewUrl(null);
+    setIsEditing(false);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setFormData({ id: null, nombre: "", cargo: "", foto: null, orden: 0, activo: true });
+    setSelectedFile(null);
+    setPreviewUrl(null);
   };
 
   // Paginación
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = blogs.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(blogs.length / itemsPerPage);
+  const currentItems = personal.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(personal.length / itemsPerPage);
 
   return (
     <div>
@@ -103,7 +125,7 @@ const Blogview = () => {
               <Home size={18} />
               <span className="hidden sm:inline">Volver al Inicio</span>
             </Link>
-            <h1 className="white fw-700 text-center flex-1">Gestión de Blog</h1>
+            <h1 className="white fw-700 text-center flex-1">Gestión de Personal</h1>
             <div className="w-32 sm:w-40"></div>
           </div>
         </div>
@@ -121,8 +143,8 @@ const Blogview = () => {
 
         {/* Navegación */}
         <div className="mb-6 flex items-center gap-2 text-sm text-gray-600">
-          <BookOpen size={18} />
-          <span>Blog</span>
+          <UserCircle size={18} />
+          <span>Personal</span>
           <span>/</span>
           <a href="/administrador" className="hover:text-gray-900">Administración</a>
         </div>
@@ -130,15 +152,15 @@ const Blogview = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="p-6 border-b border-gray-200 flex justify-between items-center">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Artículos del Blog</h2>
-              <p className="text-sm text-gray-600 mt-1">Administra publicaciones y reflexiones</p>
+              <h2 className="text-2xl font-bold text-gray-900">Equipo Pastoral</h2>
+              <p className="text-sm text-gray-600 mt-1">Administra el personal del santuario</p>
             </div>
             <button
-              onClick={openNew}
+              onClick={openNewModal}
               className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
             >
               <Plus size={18} />
-              Nuevo Artículo
+              Nuevo Personal
             </button>
           </div>
 
@@ -148,13 +170,16 @@ const Blogview = () => {
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Imagen
+                    Foto
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Título
+                    Nombre
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                    Autor
+                    Cargo
+                  </th>
+                  <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    Estado
                   </th>
                   <th className="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">
                     Acciones
@@ -166,27 +191,38 @@ const Blogview = () => {
                   currentItems.map((row, index) => (
                     <tr key={row.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-6 py-4">
-                        <img
-                          src={row.image}
-                          alt={row.name}
-                          className="w-16 h-16 rounded-lg object-cover"
-                        />
+                        {row.foto ? (
+                          <img
+                            src={row.foto}
+                            alt={row.nombre}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                            <UserCircle size={24} className="text-gray-400" />
+                          </div>
+                        )}
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-900 max-w-xs">
-                        <div className="line-clamp-2">{row.name}</div>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">{row.nombre}</td>
+                      <td className="px-6 py-4 text-sm text-gray-700">{row.cargo}</td>
+                      <td className="px-6 py-4 text-center">
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          row.activo ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
+                          {row.activo ? 'Activo' : 'Inactivo'}
+                        </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-700">{row.link}</td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
                           <button
-                            onClick={() => editBlog(row)}
+                            onClick={() => openEditModal(row)}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Editar"
                           >
                             <Edit2 size={18} />
                           </button>
                           <button
-                            onClick={() => deleteBlog(row.id)}
+                            onClick={() => handleDelete(row.id)}
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                             title="Eliminar"
                           >
@@ -198,8 +234,8 @@ const Blogview = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" className="px-6 py-8 text-center text-gray-500">
-                      No hay artículos publicados
+                    <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
+                      No hay personal registrado
                     </td>
                   </tr>
                 )}
@@ -211,7 +247,7 @@ const Blogview = () => {
           {totalPages > 1 && (
             <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
               <p className="text-sm text-gray-600">
-                Mostrando {indexOfFirstItem + 1} a {Math.min(indexOfLastItem, blogs.length)} de {blogs.length} artículos
+                Mostrando {indexOfFirstItem + 1} a {Math.min(indexOfLastItem, personal.length)} de {personal.length}
               </p>
               <div className="flex gap-2">
                 <button
@@ -247,15 +283,15 @@ const Blogview = () => {
         </div>
 
         {/* Modal */}
-        {dialogVisible && (
+        {showModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
               <div className="p-6 border-b border-gray-200 flex justify-between items-center">
                 <h3 className="text-xl font-bold text-gray-900">
-                  {editing ? "Editar Artículo" : "Nuevo Artículo"}
+                  {isEditing ? "Editar Personal" : "Nuevo Personal"}
                 </h3>
                 <button
-                  onClick={() => setDialogVisible(false)}
+                  onClick={closeModal}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   <X size={20} />
@@ -263,63 +299,52 @@ const Blogview = () => {
               </div>
 
               <div className="p-6 space-y-4">
+                {/* Nombre */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Autor/Creador
+                    Nombre Completo *
                   </label>
                   <input
                     type="text"
-                    value={blog.link}
-                    onChange={(e) => setBlog({ ...blog, link: e.target.value })}
+                    value={formData.nombre}
+                    onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    placeholder="Nombre del autor"
+                    placeholder="Nombre del personal"
                   />
                 </div>
 
+                {/* Cargo */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Título del Artículo
+                    Cargo *
                   </label>
                   <input
                     type="text"
-                    value={blog.name}
-                    onChange={(e) => setBlog({ ...blog, name: e.target.value })}
+                    value={formData.cargo}
+                    onChange={(e) => setFormData({ ...formData, cargo: e.target.value })}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
-                    placeholder="Título llamativo"
+                    placeholder="Ej: Párroco, Secretaria"
                   />
                 </div>
 
+                {/* Foto */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Descripción/Contenido
+                    Fotografía
                   </label>
-                  <textarea
-                    value={blog.description}
-                    onChange={(e) => setBlog({ ...blog, description: e.target.value })}
-                    rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent resize-none"
-                    placeholder="Contenido del artículo..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Imagen de Portada
-                  </label>
-                  
                   {previewUrl && (
-                    <div className="mb-3 p-3 bg-gray-50 rounded-lg">
-                      <p className="text-sm font-semibold mb-2">Imagen Actual:</p>
-                      <img src={previewUrl} alt="Preview" className="max-w-xs rounded-lg" />
+                    <div className="mb-3 flex justify-center">
+                      <img
+                        src={previewUrl}
+                        alt="Preview"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-gray-200"
+                      />
                     </div>
                   )}
-                  
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
                     <Upload className="mx-auto mb-2 text-gray-400" size={32} />
                     <label className="cursor-pointer">
-                      <span className="text-sm text-gray-600">
-                        Haz clic para seleccionar o arrastra una imagen
-                      </span>
+                      <span className="text-sm text-gray-600">Seleccionar foto</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -327,22 +352,50 @@ const Blogview = () => {
                         className="hidden"
                       />
                     </label>
+                    {selectedFile && <p className="text-sm text-green-600 mt-2">✓ {selectedFile.name}</p>}
                   </div>
+                </div>
+
+                {/* Orden */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Orden
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.orden}
+                    onChange={(e) => setFormData({ ...formData, orden: parseInt(e.target.value) })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    placeholder="0"
+                  />
+                </div>
+
+                {/* Activo */}
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={formData.activo}
+                    onChange={(e) => setFormData({ ...formData, activo: e.target.checked })}
+                    className="w-4 h-4 text-gray-900 border-gray-300 rounded focus:ring-gray-900"
+                  />
+                  <label className="ml-2 text-sm text-gray-700">
+                    Personal activo
+                  </label>
                 </div>
               </div>
 
               <div className="p-6 border-t border-gray-200 flex justify-end gap-3">
                 <button
-                  onClick={() => setDialogVisible(false)}
+                  onClick={closeModal}
                   className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
-                  onClick={saveBlog}
+                  onClick={handleSave}
                   className="px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
                 >
-                  {editing ? "Actualizar" : "Publicar"}
+                  {isEditing ? "Actualizar" : "Guardar"}
                 </button>
               </div>
             </div>
@@ -353,4 +406,4 @@ const Blogview = () => {
   );
 };
 
-export default Blogview;
+export default PersonalAdminView;

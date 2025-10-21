@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css"; // Tus estilos globales
+import "./assets/css/app.css"; // Estilos del template original (para vistas admin)
 import "primereact/resources/themes/lara-light-blue/theme.css"; // Tema
 import "primereact/resources/primereact.min.css"; // Estilos generales
 
