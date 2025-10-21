@@ -61,7 +61,7 @@ const Team = () => {
                 className="group bg-white rounded-xl p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center border border-gray-100"
               >
                 <div className={`w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br ${colors[i]} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <Icon className="text-white" size={24} />
+                  <Icon className="text-white" size={20} />
                 </div>
                 
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">

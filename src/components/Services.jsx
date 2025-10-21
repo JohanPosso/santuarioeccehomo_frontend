@@ -75,7 +75,7 @@ const Services = () => {
                 
                 {/* Icono flotante */}
                 <div className="absolute top-5 right-5 w-12 h-12 sm:w-14 sm:h-14 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
-                  <service.icon className="text-gray-900" size={24} />
+                  <service.icon className="text-gray-900" size={20} />
                 </div>
               </div>
 
