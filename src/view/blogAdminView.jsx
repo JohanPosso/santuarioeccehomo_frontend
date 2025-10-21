@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { BookOpen, Plus, Edit2, Trash2, X, Upload } from "lucide-react";
+import { BookOpen, Plus, Edit2, Trash2, X, Upload, Home } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Blogview = () => {
   const [blogs, setBlogs] = useState([]);
@@ -94,7 +95,17 @@ const Blogview = () => {
     <div>
       <section className="title-banner">
         <div className="container-fluid">
-          <h1 className="white fw-700 text-center">Gestión de Blog</h1>
+          <div className="flex items-center justify-between max-w-7xl mx-auto">
+            <Link 
+              to="/"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all"
+            >
+              <Home size={18} />
+              <span className="hidden sm:inline">Volver al Inicio</span>
+            </Link>
+            <h1 className="white fw-700 text-center flex-1">Gestión de Blog</h1>
+            <div className="w-32 sm:w-40"></div>
+          </div>
         </div>
       </section>
 

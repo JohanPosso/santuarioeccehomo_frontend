@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Info, Save, Upload, ChevronDown, ChevronUp } from "lucide-react";
+import { Info, Save, Upload, ChevronDown, ChevronUp, Home } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const InformacionView = () => {
   const [data, setData] = useState(null);
@@ -102,7 +103,17 @@ const InformacionView = () => {
     <div>
       <section className="title-banner">
         <div className="container-fluid">
-          <h1 className="white fw-700 text-center">Editar Información General</h1>
+          <div className="flex items-center justify-between max-w-7xl mx-auto">
+            <Link 
+              to="/"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all"
+            >
+              <Home size={18} />
+              <span className="hidden sm:inline">Volver al Inicio</span>
+            </Link>
+            <h1 className="white fw-700 text-center flex-1">Editar Información General</h1>
+            <div className="w-32 sm:w-40"></div>
+          </div>
         </div>
       </section>
 
