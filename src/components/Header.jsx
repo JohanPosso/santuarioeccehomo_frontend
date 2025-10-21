@@ -55,7 +55,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <div className="hidden lg:flex items-center gap-10 xl:gap-12">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -70,13 +70,6 @@ const Header = () => {
                 }`} />
               </Link>
             ))}
-            
-            <Link
-              to="/donaciones"
-              className="ml-2 px-6 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-all"
-            >
-              Donar
-            </Link>
           </div>
 
           {/* Mobile Button */}
@@ -110,13 +103,6 @@ const Header = () => {
                     {item.label}
                   </Link>
                 ))}
-                <Link
-                  to="/donaciones"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-4 py-3 bg-gray-900 text-white text-center rounded-lg text-sm font-medium mt-2"
-                >
-                  Donar
-                </Link>
               </div>
             </motion.div>
           )}
