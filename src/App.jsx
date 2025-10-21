@@ -30,7 +30,7 @@ import InformacionView from "./view/informacionAdminView";
 import ServiciosView from "./view/serviciosAdminView";
 import BlogView from "./view/blogAdminView";
 import UsuariosView from "./view/UsuariosView";
-import SubirFotoView from "./view/SubirFotoView";
+import GaleriaAdminView from "./view/GaleriaAdminView";
 import LoginView from "./view/loginView";
 import NotFoundPage from "./view/NotFoundPage";
 import PersonalAdminView from "./view/PersonalAdminView";
@@ -85,7 +85,7 @@ function AppContent() {
           <Route path="/servicios-view" element={<ProtectedRoute element={<ServiciosView />} />} />
           <Route path="/blog-view" element={<ProtectedRoute element={<BlogView />} />} />
           <Route path="/usuarios-view" element={<ProtectedRoute element={<UsuariosView />} />} />
-          <Route path="/galeria-view" element={<ProtectedRoute element={<SubirFotoView />} />} />
+          <Route path="/galeria-view" element={<ProtectedRoute element={<GaleriaAdminView />} />} />
           <Route path="/personal-view" element={<ProtectedRoute element={<PersonalAdminView />} />} />
           <Route path="/horarios-view" element={<ProtectedRoute element={<HorariosAdminView />} />} />
           <Route path="/calendario-view" element={<ProtectedRoute element={<CalendarioAdminView />} />} />

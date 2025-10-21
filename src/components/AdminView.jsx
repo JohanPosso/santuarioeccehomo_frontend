@@ -54,7 +54,7 @@ const AdminEndpoints = () => {
     },
     {
       title: "Gestionar Galería",
-      description: "Sube fotos de eventos",
+      description: "Administra imágenes y videos",
       route: "/galeria-view",
       icon: Image,
       color: "from-pink-500 to-rose-500",

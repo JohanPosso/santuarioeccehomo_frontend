@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Image as ImageIcon, Video, Play } from "lucide-react";
 
 const GaleriaView = () => {
   const [imagenes, setImagenes] = useState([]);
@@ -59,12 +59,15 @@ const GaleriaView = () => {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <ImageIcon className="mx-auto mb-6 text-amber-400" size={56} />
+            <div className="inline-flex items-center gap-3 mb-6">
+              <ImageIcon className="text-amber-400" size={56} />
+              <Video className="text-purple-400" size={56} />
+            </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-              Galería de Fotos
+              Galería Multimedia
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto">
-              Momentos especiales y memorables de nuestra comunidad de fe
+              Momentos especiales y memorables de nuestra comunidad de fe en imágenes y videos
             </p>
           </motion.div>
         </div>
@@ -89,13 +92,31 @@ const GaleriaView = () => {
                   onClick={() => openLightbox(imagen, i)}
                   className="group relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300"
                 >
-                  <img
-                    src={imagen.imagen || "/media/gallery/placeholder.jpg"}
-                    alt={`Galería ${i + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                  {imagen.tipo === 'video' ? (
+                    <>
+                      <video
+                        src={imagen.imagen}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                        <Play className="text-white" size={40} />
+                      </div>
+                    </>
+                  ) : (
+                    <img
+                      src={imagen.imagen || "/media/gallery/placeholder.jpg"}
+                      alt={`Galería ${i + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  )}
+                  
+                  {/* Overlay en hover */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <ImageIcon className="text-white" size={32} />
+                    {imagen.tipo === 'video' ? (
+                      <Video className="text-white" size={32} />
+                    ) : (
+                      <ImageIcon className="text-white" size={32} />
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -145,16 +166,31 @@ const GaleriaView = () => {
             )}
 
             <div onClick={(e) => e.stopPropagation()} className="max-w-6xl w-full">
-              <motion.img
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                src={selectedImage.imagen}
-                alt={`Galería ${currentIndex + 1}`}
-                className="w-full max-h-[85vh] object-contain rounded-lg"
-              />
-              <div className="text-center mt-4 text-white text-sm">
-                {currentIndex + 1} / {imagenes.length}
+              {selectedImage.tipo === 'video' ? (
+                <motion.video
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  src={selectedImage.imagen}
+                  controls
+                  autoPlay
+                  className="w-full max-h-[85vh] object-contain rounded-lg"
+                />
+              ) : (
+                <motion.img
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  src={selectedImage.imagen}
+                  alt={`Galería ${currentIndex + 1}`}
+                  className="w-full max-h-[85vh] object-contain rounded-lg"
+                />
+              )}
+              
+              <div className="text-center mt-4">
+                <p className="text-white/60 text-sm">
+                  {currentIndex + 1} / {imagenes.length}
+                </p>
               </div>
             </div>
           </motion.div>
