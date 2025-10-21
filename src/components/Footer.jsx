@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Church, Heart, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Church, Heart, ArrowRight, LogIn } from "lucide-react";
 
 const Footer = () => {
   const [data, setData] = useState(null);
@@ -167,17 +167,27 @@ const Footer = () => {
             <p className="text-center sm:text-left">
               © {new Date().getFullYear()} Santuario. Todos los derechos reservados.
             </p>
-            <p className="flex items-center gap-2">
-              Desarrollado con <Heart size={14} className="text-red-500" /> por{" "}
-              <a 
-                href="https://johanposso.com/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-amber-400 hover:text-amber-300 font-semibold transition-colors"
+            <div className="flex items-center gap-4">
+              <Link 
+                to="/login" 
+                className="inline-flex items-center gap-1.5 text-gray-500 hover:text-amber-400 transition-colors text-xs group"
               >
-                Johan Posso
-              </a>
-            </p>
+                <LogIn size={14} className="group-hover:scale-110 transition-transform" />
+                Iniciar Sesión
+              </Link>
+              <span className="text-gray-700">|</span>
+              <p className="flex items-center gap-2">
+                Desarrollado con <Heart size={14} className="text-red-500" /> por{" "}
+                <a 
+                  href="https://johanposso.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-400 hover:text-amber-300 font-semibold transition-colors"
+                >
+                  Johan Posso
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

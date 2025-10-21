@@ -7,7 +7,8 @@ import {
   FaChurch,
   FaMapMarkerAlt,
   FaPhone,
-  FaEnvelope
+  FaEnvelope,
+  FaSignInAlt
 } from "react-icons/fa";
 
 const FooterModerno = () => {
@@ -130,17 +131,27 @@ const FooterModerno = () => {
         {/* Barra inferior */}
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Santuario. Todos los derechos reservados.</p>
-          <p>
-            Desarrollado por{" "}
-            <a 
-              href="https://johanposso.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-church-secondary hover:underline"
+          <div className="flex items-center gap-4">
+            <Link 
+              to="/login" 
+              className="inline-flex items-center gap-1.5 text-gray-500 hover:text-church-secondary transition-colors text-xs group"
             >
-              Johan Posso
-            </a>
-          </p>
+              <FaSignInAlt className="group-hover:scale-110 transition-transform" />
+              Iniciar Sesión
+            </Link>
+            <span className="text-gray-700">|</span>
+            <p>
+              Desarrollado por{" "}
+              <a 
+                href="https://johanposso.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-church-secondary hover:underline"
+              >
+                Johan Posso
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
