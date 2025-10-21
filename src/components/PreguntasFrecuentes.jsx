@@ -1,168 +1,136 @@
-import React from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { ChevronDown, HelpCircle, Sparkles, ArrowRight } from "lucide-react";
 
 const PreguntasFrecuentes = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [ref, inView] = useInView({ threshold: 0.15, triggerOnce: true });
+
+  const faqs = [
+    {
+      question: "¿Dónde se encuentra ubicado el Santuario?",
+      answer: "Estamos ubicados en el Corregimiento Plan de Raspadura, Municipio Unión Panamericana, Chocó. Un lugar de gran significado espiritual."
+    },
+    {
+      question: "¿Cuáles son los horarios de misas?",
+      answer: "Lunes a Sábado a las 11:00 AM. Los domingos celebramos tres misas: 9:00 AM, 11:00 AM y 4:00 PM."
+    },
+    {
+      question: "¿Hay costo para entrar al santuario?",
+      answer: "La entrada es completamente gratuita. Aceptamos donaciones voluntarias para el mantenimiento del santuario."
+    },
+    {
+      question: "¿Se pueden realizar sacramentos?",
+      answer: "Sí, ofrecemos bautizos, matrimonios, confirmaciones y otros sacramentos. Contáctanos para agendar."
+    },
+    {
+      question: "¿Ofrecen hospedaje o alojamiento?",
+      answer: "Hay opciones de hospedaje cerca del santuario. Recomendamos reservar con anticipación en fechas especiales."
+    }
+  ];
+
   return (
-    <div className="accordion container mb-5" id="accordionExample">
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseOne"
-            aria-expanded="true"
-            aria-controls="collapseOne"
-          >
-            ¿Dónde se encuentra ubicado el Santuario del Santo Ecce Homo?
-          </button>
-        </p>
-        <div
-          id="collapseOne"
-          className="accordion-collapse collapse show"
-          data-bs-parent="#accordionExample"
+    <section ref={ref} className="py-16 sm:py-20 lg:py-28 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 lg:mb-16"
         >
-          <div className="accordion-body">
-            El santuario se encuentra ubicado en el Corregimiento Plan de
-            Raspadura, Municipio Unión Panamericana, Chocó. Es un lugar de gran
-            significado religioso y cultural, visitado por peregrinos de todo el
-            mundo.
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full mb-4">
+            <HelpCircle size={14} />
+            <span className="text-xs font-semibold uppercase tracking-wider">Preguntas Frecuentes</span>
           </div>
-        </div>
-      </div>
+          
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 px-4">
+            ¿Tienes Alguna Duda?
+          </h2>
+          
+          <p className="text-base sm:text-lg text-gray-600 px-4">
+            Encuentra respuestas a las preguntas más comunes
+          </p>
+        </motion.div>
 
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
-          >
-            ¿Cuáles son los horarios de visita y de misas?
-          </button>
-        </p>
-        <div
-          id="collapseTwo"
-          className="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div className="accordion-body">
-            El santuario está abierto al público de Lunes - Sabado - 11:00 am
-            Domingo 9:00 am, 11:00 am, 4:00 pm. Las misas se celebran en esos
-            horarios.
-          </div>
-        </div>
-      </div>
+        <div className="space-y-3 sm:space-y-4">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+            >
+              <button
+                onClick={() => setActiveIndex(activeIndex === i ? -1 : i)}
+                className="w-full flex items-center justify-between p-5 sm:p-6 text-left hover:bg-gray-50 transition-colors"
+              >
+                <span className="font-semibold text-gray-900 pr-4 text-sm sm:text-base">
+                  {faq.question}
+                </span>
+                <motion.div
+                  animate={{ rotate: activeIndex === i ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0"
+                >
+                  <ChevronDown 
+                    className={`${activeIndex === i ? "text-amber-600" : "text-gray-400"}`} 
+                    size={20} 
+                  />
+                </motion.div>
+              </button>
 
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
-            aria-expanded="false"
-            aria-controls="collapseThree"
-          >
-            ¿Hay algún costo para entrar al santuario?
-          </button>
-        </p>
-        <div
-          id="collapseThree"
-          className="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div className="accordion-body">
-            La entrada al santuario es gratuita. Sin embargo, se aceptan
-            donaciones para el mantenimiento y conservación del lugar.
-          </div>
+              <AnimatePresence>
+                {activeIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+                      <div className="border-t border-gray-200 pt-4">
+                        <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
-      </div>
 
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseFour"
-            aria-expanded="false"
-            aria-controls="collapseFour"
-          >
-            ¿Se pueden realizar eventos religiosos como bautizos o matrimonios
-            en el santuario?
-          </button>
-        </p>
-        <div
-          id="collapseFour"
-          className="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="mt-10 lg:mt-12 text-center"
         >
-          <div className="accordion-body">
-            Sí, el santuario ofrece la posibilidad de realizar eventos
-            religiosos como bautizos, matrimonios y otras celebraciones. Para
-            más información y reservas, puedes comunicarte con la administración
-            del santuario.
+          <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl p-6 sm:p-8 text-white">
+            <h3 className="text-xl sm:text-2xl font-bold mb-3">
+              ¿No encontraste tu respuesta?
+            </h3>
+            <p className="text-sm sm:text-base text-white/90 mb-6">
+              Estamos aquí para ayudarte. Escríbenos y con gusto te atenderemos.
+            </p>
+            <Link
+              to="/contacto"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all shadow-lg"
+            >
+              Contáctanos
+              <ArrowRight size={18} />
+            </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
-
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseFive"
-            aria-expanded="false"
-            aria-controls="collapseFive"
-          >
-            ¿Existen opciones de hospedaje cerca del santuario?
-          </button>
-        </p>
-        <div
-          id="collapseFive"
-          className="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div className="accordion-body">
-            Sí, en las cercanías del santuario hay diversas opciones de
-            hospedaje, incluyendo hoteles, hostales y casas de retiro. Se
-            recomienda hacer reservaciones con anticipación, especialmente en
-            fechas de alta afluencia de peregrinos.
-          </div>
-        </div>
-      </div>
-
-      <div className="accordion-item">
-        <p className="accordion-header" style={{ fontWeight: "bold" }}>
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseSix"
-            aria-expanded="false"
-            aria-controls="collapseSix"
-          >
-            ¿El santuario cuenta con guías turísticos o recorridos especiales?
-          </button>
-        </p>
-        <div
-          id="collapseSix"
-          className="accordion-collapse collapse"
-          data-bs-parent="#accordionExample"
-        >
-          <div className="accordion-body">
-            Sí, se ofrecen recorridos guiados para grupos y visitantes
-            individuales que deseen conocer más sobre la historia y el
-            significado del santuario. Para más detalles, consulta en la oficina
-            de información del santuario.
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
