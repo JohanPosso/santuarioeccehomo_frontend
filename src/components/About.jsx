@@ -97,7 +97,7 @@ const About = () => {
         </div>
 
         {/* Imagen + Valores */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mt-12 lg:mt-20">
           
           {/* Imagen */}
           <motion.div
