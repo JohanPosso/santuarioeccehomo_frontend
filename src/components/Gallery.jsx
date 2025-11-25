@@ -6,14 +6,32 @@ const Gallery = () => {
   const [imagenes, setImagenes] = useState([]);
 
   useEffect(() => {
-    // Reemplaza `${API}/find-galeria` con tu URL de la API
     fetch(`${API}/find-galeria`)
-      .then((response) => response.json())
-      .then((data) => {
-        setImagenes(data); // Guarda las imágenes en el estado
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
       })
-      .catch((error) => console.error("Error fetching gallery:", error));
-  }, []); // Se ejecuta solo una vez al montar el componente
+      .then((data) => {
+        // Validar que la respuesta sea un array
+        if (Array.isArray(data)) {
+          setImagenes(data);
+        } else if (data && Array.isArray(data.data)) {
+          setImagenes(data.data);
+        } else if (data && data.error) {
+          console.error("Error del servidor:", data.error, data.message);
+          setImagenes([]);
+        } else {
+          console.warn("Respuesta inesperada del servidor:", data);
+          setImagenes([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching gallery:", error);
+        setImagenes([]);
+      });
+  }, [API]); // Se ejecuta solo una vez al montar el componente
 
   return (
     <div>

@@ -11,16 +11,36 @@ const GaleriaView = () => {
 
   useEffect(() => {
     fetch(`${API}/find-galeria`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Error ${res.status}: ${res.statusText}`);
+        }
+        return res.json();
+      })
       .then((data) => {
-        setImagenes(data);
+        // Validar que la respuesta sea un array
+        if (Array.isArray(data)) {
+          setImagenes(data);
+        } else if (data && Array.isArray(data.data)) {
+          // Si viene envuelto en un objeto
+          setImagenes(data.data);
+        } else if (data && data.error) {
+          // Si hay un error, mostrar mensaje pero no romper la aplicación
+          console.error("Error del servidor:", data.error, data.message);
+          setImagenes([]); // Establecer array vacío para evitar errores
+        } else {
+          // Si no es un array válido, establecer array vacío
+          console.warn("Respuesta inesperada del servidor:", data);
+          setImagenes([]);
+        }
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Error al obtener la galería:", err);
+        setImagenes([]); // Establecer array vacío para evitar errores
         setLoading(false);
       });
-  }, []);
+  }, [API]);
 
   const openLightbox = (imagen, index) => {
     setSelectedImage(imagen);

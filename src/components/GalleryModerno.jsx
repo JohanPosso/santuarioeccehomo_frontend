@@ -11,16 +11,33 @@ const GalleryModerno = () => {
 
   useEffect(() => {
     fetch(`${API}/find-galeria`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        setImagenes(data);
+        // Validar que la respuesta sea un array
+        if (Array.isArray(data)) {
+          setImagenes(data);
+        } else if (data && Array.isArray(data.data)) {
+          setImagenes(data.data);
+        } else if (data && data.error) {
+          console.error("Error del servidor:", data.error, data.message);
+          setImagenes([]);
+        } else {
+          console.warn("Respuesta inesperada del servidor:", data);
+          setImagenes([]);
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching gallery:", error);
+        setImagenes([]);
         setLoading(false);
       });
-  }, []);
+  }, [API]);
 
   const openLightbox = (imagen, index) => {
     setSelectedImage(imagen);
