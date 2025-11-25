@@ -21,7 +21,17 @@ const Hero = () => {
   );
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-white to-amber-50/30 pt-20 overflow-hidden">
+    <section 
+      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
+      style={{
+        backgroundImage: `url('/iglesia.webp')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Overlay oscuro para mejorar legibilidad del texto */}
+      <div className="absolute inset-0 bg-black/50" />
       
       {/* Elementos decorativos de fondo */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -42,17 +52,17 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100 text-amber-800 rounded-full mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 text-amber-800 rounded-full mb-6 backdrop-blur-sm"
             >
               <Church size={16} />
               <span className="text-xs font-semibold uppercase tracking-wider">Bienvenido a Nuestro Santuario</span>
             </motion.div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-tight font-sans">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight font-sans drop-shadow-lg">
               {data.seccion_1titulo}
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed drop-shadow-md">
               {data.seccion_1descripcion}
             </p>
             
@@ -76,18 +86,18 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/30">
               <div>
-                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">50+</div>
-                <div className="text-sm text-gray-600">Años de Historia</div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-1 drop-shadow-lg">50+</div>
+                <div className="text-sm text-white/90">Años de Historia</div>
               </div>
               <div>
-                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">1K+</div>
-                <div className="text-sm text-gray-600">Fieles</div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-1 drop-shadow-lg">1K+</div>
+                <div className="text-sm text-white/90">Fieles</div>
               </div>
               <div>
-                <div className="text-3xl sm:text-4xl font-bold text-amber-600 mb-1">100+</div>
-                <div className="text-sm text-gray-600">Eventos</div>
+                <div className="text-3xl sm:text-4xl font-bold text-amber-400 mb-1 drop-shadow-lg">100+</div>
+                <div className="text-sm text-white/90">Eventos</div>
               </div>
             </div>
           </motion.div>
